@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg8pvye1pb3ig"]
+
+[ext_resource type="PackedScene" uid="uid://n4tuv3fsdgqj" path="res://react/ReactRoot.tscn" id="1_3dh2e"]
+
+[node name="main" type="Node2D"]
+
+[node name="Document" parent="." instance=ExtResource("1_3dh2e")]
