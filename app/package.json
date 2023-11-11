@@ -1,5 +1,6 @@
 {
-  "name": "fire-app",
+  "name": "gd-react-app",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
