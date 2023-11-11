@@ -1,4 +1,4 @@
-# Fire
+# React GD
 
 React.js integration with the Godot Game Engine by using [Microsoft's Clearscript](https://github.com/microsoft/ClearScript) to run JS code via [Google's v8](https://v8.dev/).
 
