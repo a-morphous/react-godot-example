@@ -78,7 +78,7 @@ namespace Spectral.React
 			switch (type.ToLower())
 			{
 				case "label":
-					if (ControlPropHelpers.TryGetProps(props, "rich", out object isRich))
+					if (C.TryGetProps(props, "rich", out object isRich))
 					{
 						newNode = new RichLabelNode();
 						break;

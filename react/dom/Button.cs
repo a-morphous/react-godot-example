@@ -10,7 +10,7 @@ namespace Spectral.React {
 
             _instance.Text = TextPropHelpers.GetTextContent(newProps);
 
-            if (ControlPropHelpers.TryGetProps(newProps, "onClick", out dynamic onClick)) {
+            if (C.TryGetProps(newProps, "onClick", out dynamic onClick)) {
                 if (clickEvent != null) {
                     _instance.Pressed -= clickEvent;
                 }
