@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 using Microsoft.ClearScript;
 using Microsoft.ClearScript.V8;
 
@@ -9,6 +10,9 @@ namespace Spectral.React
 	{
 		readonly List<IDom> _children;
 		V8ScriptEngine _engine;
+
+		[Export]
+		bool LiveReload = false;
 
 		public V8ScriptEngine Engine
 		{
@@ -64,8 +68,35 @@ namespace Spectral.React
 			_engine.AddHostType("Document", typeof(Document));
 			_engine.AddHostObject("root", this);
 
-			using var file = FileAccess.Open("res://app/dist/index.js", FileAccess.ModeFlags.Read);
+			using var file = Godot.FileAccess.Open("res://app/dist/index.js", Godot.FileAccess.ModeFlags.Read);
 			_engine.Execute(file.GetAsText());
+
+			if (LiveReload)
+			{
+				GDScript DirectoryWatcherScript = (GDScript)GD.Load("res://vendor/DirectoryWatcher.gd");
+				Node DirectoryWatcher = (Node)DirectoryWatcherScript.New(); // This is a GodotObject
+				DirectoryWatcher.Call("add_scan_directory", "res://app/dist");
+				AddChild(DirectoryWatcher);
+				DirectoryWatcher.Connect("files_modified", Callable.From<Array>(OnLiveReload));
+				GD.Print("Watching!");
+			}
+
+		}
+
+		public void OnLiveReload(Array files)
+		{
+			GD.Print("Live reload!");
+			clearChildren();
+			using var file = Godot.FileAccess.Open("res://app/dist/index.js", Godot.FileAccess.ModeFlags.Read);
+			try
+			{
+				_engine.Execute(file.GetAsText());
+			}
+			catch (System.Exception e)
+			{
+				GD.Print("Failed to run livereload ", e);
+			}
+
 		}
 
 		public static IDom createElement(

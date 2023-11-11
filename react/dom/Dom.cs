@@ -37,7 +37,7 @@ namespace Spectral.React {
         }
 
         protected virtual void updatePropsImpl(ScriptObject newProps) {
-            ControlPropHelpers.InjectProps(_instance, _previousProps, newProps);
+            ControlPropHelpers.InjectProps(this, _previousProps, newProps);
         }
 
         public Control getNode() {

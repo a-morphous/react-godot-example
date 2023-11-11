@@ -49,7 +49,8 @@ namespace Spectral.React {
         }
     }
     public class ControlPropHelpers {
-        public static void InjectProps(Control instance, ScriptObject prevProps, ScriptObject props) {
+        public static void InjectProps(IDom component, ScriptObject prevProps, ScriptObject props) {
+            var instance = component.getNode();
             if (
                 C.TryGetProps(props, "tooltip", out object tooltipProps)
                 && tooltipProps is string tooltip
@@ -124,6 +125,40 @@ namespace Spectral.React {
             }
             if (C.TryGetProps(styleProps, "expandBehaviorV", out object sizeFlagsV)) {
                 instance.SizeFlagsVertical = (Control.SizeFlags)Convert.ToInt64(sizeFlagsV);
+            }
+
+            // absolute position
+            bool hasGlobalPosition = false;
+            if (C.TryGetStyleProps(props, "x", out object x)) {
+                var globalPosition = instance.GlobalPosition;
+                globalPosition.X = (int)x;
+                instance.SetGlobalPosition(globalPosition);
+                hasGlobalPosition = true;
+            }
+            if (C.TryGetStyleProps(props, "y", out object y)) {
+                var globalPosition = instance.GlobalPosition;
+                globalPosition.Y = (int)y;
+                instance.SetGlobalPosition(globalPosition);
+                hasGlobalPosition = true;
+            }
+            if (hasGlobalPosition) {
+                SyncGlobalPosition(component, props);
+            }
+        }
+
+        private static async void SyncGlobalPosition(IDom component, ScriptObject props) {
+            await component.getDocument().ToSignal(component.getDocument().GetTree(), SceneTree.SignalName.ProcessFrame);
+            // absolute position
+            var instance = component.getNode();
+            if (C.TryGetStyleProps(props, "x", out object x)) {
+                var globalPosition = instance.GlobalPosition;
+                globalPosition.X = (int)x;
+                instance.SetGlobalPosition(globalPosition);
+            }
+            if (C.TryGetStyleProps(props, "y", out object y)) {
+                var globalPosition = instance.GlobalPosition;
+                globalPosition.Y = (int)y;
+                instance.SetGlobalPosition(globalPosition);
             }
         }
     }

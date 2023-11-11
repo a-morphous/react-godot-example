@@ -4,3 +4,4 @@
 
 [node name="Document" type="CanvasLayer"]
 script = ExtResource("1_hdoqv")
+LiveReload = true

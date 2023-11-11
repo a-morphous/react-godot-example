@@ -1,6 +1,9 @@
 // CONTROL
 interface ControlStyle {
-	// position?: Vector2
+	// global position. For absolutely positioned controls only.
+	x?: number
+	y?: number
+	
 	// rotation?: number
 	// scale?: Vector2
 
