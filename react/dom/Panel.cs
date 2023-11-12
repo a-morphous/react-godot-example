@@ -8,7 +8,7 @@ namespace Spectral.React {
 			_instance.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
         }
         protected override void updatePropsImpl(ScriptObject newProps) {
-            base.updatePropsImpl(newProps);
+            ControlPropHelpers.InjectProps(this, _instance, _previousProps, newProps);
 			C.InjectThemeStyleboxProps(_instance, newProps, "backgroundStyle", "panel");
         }
     }

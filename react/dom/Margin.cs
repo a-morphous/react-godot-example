@@ -8,7 +8,7 @@ namespace Spectral.React {
 			_instance.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
         }
         protected override void updatePropsImpl(ScriptObject newProps) {
-            base.updatePropsImpl(newProps);
+            ControlPropHelpers.InjectProps(this, _instance, _previousProps, newProps);
 			C.InjectThemeIntProps(_instance, newProps, "margin", "margin_top");
 			C.InjectThemeIntProps(_instance, newProps, "margin", "margin_left");
 			C.InjectThemeIntProps(_instance, newProps, "margin", "margin_right");

@@ -116,6 +116,14 @@ const App = () => {
 					</control>
 				</div>
 			</margin>
+
+			<raw
+				name="RawNode!"
+				type="Node2D"
+				raw={{
+					position: new Vector2(400, 300),
+				}}
+			></raw>
 		</>
 	)
 }

@@ -144,6 +144,13 @@ namespace Spectral.React
 					}
 					newNode = new ContainerNode();
 					break;
+				case "raw":
+					if (C.TryGetProps(props, "type", out object rawType)) {
+						newNode = new RawNode((string)rawType);
+						break;
+					} 
+					newNode = new DomNode<Node>();
+					break;
 				default:
 					newNode = new ContainerNode();
 					break;

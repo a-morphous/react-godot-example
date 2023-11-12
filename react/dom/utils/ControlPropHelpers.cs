@@ -6,9 +6,8 @@ namespace Spectral.React
 {
     public class ControlPropHelpers
     {
-        public static void InjectProps(IAnimatedDom component, ScriptObject prevProps, ScriptObject props)
+        public static void InjectProps(IAnimatedDom component, Control instance, ScriptObject prevProps, ScriptObject props)
         {
-            var instance = component.getNode();
             T.InjectAnimatable(component, prevProps, props);
             if (
                 C.TryGetProps(props, "tooltip", out object tooltipProps)
@@ -151,7 +150,7 @@ namespace Spectral.React
             }
             if (hasGlobalPosition)
             {
-                SyncGlobalPosition(component, props);
+                SyncGlobalPosition(component, instance, props);
             }
 
             // size
@@ -181,11 +180,10 @@ namespace Spectral.React
             }
         }
 
-        private static async void SyncGlobalPosition(IDom component, ScriptObject props)
+        private static async void SyncGlobalPosition(IDom component, Control instance, ScriptObject props)
         {
             await component.getDocument().ToSignal(component.getDocument().GetTree(), SceneTree.SignalName.ProcessFrame);
             // absolute position
-            var instance = component.getNode();
             if (C.TryGetStyleProps(props, "x", out object x))
             {
                 var globalPosition = instance.GlobalPosition;

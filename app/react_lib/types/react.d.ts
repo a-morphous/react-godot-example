@@ -88,11 +88,15 @@ interface FontShadowStyle {
 	shadowOutlineSize?: number
 }
 
-// CONTROL
-interface ControlAttributes<T> extends DomAttributes<T> {
+interface CanvasItemAttributes<T> extends DomAttributes<T> {
 	children?: ReactNode | undefined
-	theme?: string // path to a theme resource
 	name?: string
+}
+
+// CONTROL
+interface ControlAttributes<T> extends CanvasItemAttributes<T> {
+	theme?: string // path to a theme resource
+	
 
 	tooltip?: string
 	onMouseEnter?: () => void
@@ -186,6 +190,11 @@ interface PanelAttributes<T> extends ContainerAttributes<T> {
 	}
 }
 
+interface RawNodeAttributes<T> extends CanvasItemAttributes<T> {
+	type?: string,
+	raw?: Record<string, any>
+}
+
 declare namespace JSX {
 	interface IntrinsicElements {
 		control: React.DetailedHTMLProps<ControlAttributes<ControlElement>, ControlElement>
@@ -196,5 +205,8 @@ declare namespace JSX {
 		vbox: React.DetailedHTMLProps<BoxAttributes<ControlElement>, ControlElement>
 		flow: React.DetailedHTMLProps<FlowAttributes<ControlElement>, ControlElement>
 		margin: React.DetailedHTMLProps<MarginAttributes<ControlElement>, ControlElement>
+
+		// used when the actual node is not available.
+		raw: React.DetailedHTMLProps<RawNodeAttributes<GlobalJSXElement>, GlobalJSXElement>
 	}
 }

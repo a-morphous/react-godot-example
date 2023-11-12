@@ -9,7 +9,7 @@ namespace Spectral.React
 
         protected override void updatePropsImpl(ScriptObject newProps)
         {
-            base.updatePropsImpl(newProps);
+            ControlPropHelpers.InjectProps(this, _instance, _previousProps, newProps);
 
             _instance.Text = TextPropHelpers.GetTextContent(newProps);
             ThemePropHelpers.InjectFontProps(_instance, _previousProps, newProps);

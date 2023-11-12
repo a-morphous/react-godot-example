@@ -9,7 +9,7 @@ namespace Spectral.React
     {
         public void setDocument(Document doc);
         public Document getDocument();
-        public Control getNode();
+        public Node getNode();
         public void updateProps(ScriptObject newProps);
 
         public void clearChildren();
@@ -20,7 +20,7 @@ namespace Spectral.React
     }
 
     public partial class DomNode<T> : IAnimatedDom
-        where T : Control, new()
+        where T : Node, new()
     {
         protected Document _document;
 
@@ -48,10 +48,9 @@ namespace Spectral.React
 
         protected virtual void updatePropsImpl(ScriptObject newProps)
         {
-            ControlPropHelpers.InjectProps(this, _previousProps, newProps);
         }
 
-        public Control getNode()
+        public Node getNode()
         {
             return _instance;
         }
@@ -143,7 +142,17 @@ namespace Spectral.React
         }
     }
 
-    public class ControlNode : DomNode<Control> { }
+    public class ControlNode : DomNode<Control> {
+        protected override void updatePropsImpl(ScriptObject newProps)
+        {
+            ControlPropHelpers.InjectProps(this, _instance, _previousProps, newProps);
+        }
+    }
 
-    public class ContainerNode : DomNode<BoxContainer> { }
+    public class ContainerNode : DomNode<BoxContainer> { 
+        protected override void updatePropsImpl(ScriptObject newProps)
+        {
+            ControlPropHelpers.InjectProps(this, _instance, _previousProps, newProps);
+        }
+    }
 }

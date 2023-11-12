@@ -1,4 +1,4 @@
-interface Vector2 {
+declare class Vector2 {
 	x: number
 	y: number
 	constructor()

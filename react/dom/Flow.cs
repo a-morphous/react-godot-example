@@ -8,7 +8,7 @@ namespace Spectral.React
 	{
 		protected override void updatePropsImpl(ScriptObject newProps)
 		{
-			base.updatePropsImpl(newProps);
+			ControlPropHelpers.InjectProps(this, _instance, _previousProps, newProps);
 
 			if (C.TryGetProps(newProps, "vertical", out object vertical))
 			{
