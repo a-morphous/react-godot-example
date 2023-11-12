@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { render } from "renderer"
-import { LayoutPreset, MouseFilterEnum, SizeFlags } from "enums"
+import { LayoutPreset, MouseFilterEnum, SizeFlags } from "gd"
+import { AnimatableNode } from "enums"
 
 const App = () => {
 	const [count, setCount] = useState(0)
@@ -15,6 +16,9 @@ const App = () => {
 				<div
 					style={{
 						backgroundStyle: "res://assets/panel.tres",
+						modulateSelf: count > 2 ? "#FFFFFFFF" : "#FFFFFF00",
+						transitions: [AnimatableNode.ModulateSelf],
+						transitionTimeMS: [100],
 					}}
 				>
 					<hbox

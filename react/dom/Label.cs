@@ -14,6 +14,7 @@ namespace Spectral.React {
             _instance.BbcodeEnabled = true;
             _instance.CustomMinimumSize = new Vector2(0, 32);
         }
+        
         protected override void updatePropsImpl(ScriptObject newProps) {
             base.updatePropsImpl(newProps);
             _instance.Text = TextPropHelpers.GetTextContent(newProps);

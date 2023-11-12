@@ -1,6 +1,22 @@
 // GENERIC STYLES
 
-interface ControlStyle {
+/**
+ * Used to define animations.
+ * All the elements are arrays, and each index in the array points to the same transition style.
+ * So if you want to translate width and height by 200ms and 400ms respectively,
+ * your transitions array should be 
+ * [AnimatableNode.Width, AnimatableNode.Height]
+ * and your transitionTimeMS array should be 
+ * [200, 400]
+ */
+interface AnimationStyle {
+	transitions?: AnimatableNode[],
+	transitionTimeMS?: number[],
+	transitionTypes?: TransitionType[],
+	transitionEasing?: EaseType[],
+}
+
+interface ControlStyle extends AnimationStyle {
 	// global position. For absolutely positioned controls only.
 	x?: number
 	y?: number
@@ -27,6 +43,7 @@ interface ControlStyle {
 	// pivotOffset?: Vector2
 
 	modulate?: ColorType
+	modulateSelf?: ColorType
 	visible?: boolean
 	zIndex?: number
 
@@ -54,7 +71,7 @@ interface ControlStyle {
 	growVertical?: GrowDirection
 
 	layoutDirection?: LayoutDirectionEnum
-}
+} 
 
 interface FontStyle {
 	font?: string // as a res:// string

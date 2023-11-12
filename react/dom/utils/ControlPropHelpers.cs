@@ -6,9 +6,10 @@ namespace Spectral.React
 {
     public class ControlPropHelpers
     {
-        public static void InjectProps(IDom component, ScriptObject prevProps, ScriptObject props)
+        public static void InjectProps(IAnimatedDom component, ScriptObject prevProps, ScriptObject props)
         {
             var instance = component.getNode();
+            T.InjectAnimatable(component, prevProps, props);
             if (
                 C.TryGetProps(props, "tooltip", out object tooltipProps)
                 && tooltipProps is string tooltip
@@ -61,11 +62,17 @@ namespace Spectral.React
             {
                 return;
             }
-            ScriptObject styleProps = (ScriptObject)style;
 
             if (C.TryGetStyleProps(props, "modulate", out object modulate))
             {
-                instance.Modulate = C.ToColor(modulate);
+                // TODO: actually factor in the transition
+                var modulateTween = component.getTween("modulate");
+                modulateTween.TweenProperty(instance, "modulate", C.ToColor(modulate), .4);
+                // instance.Modulate = C.ToColor(modulate);
+            }
+            if (C.TryGetStyleProps(props, "modulateSelf", out object modulateSelf))
+            {
+                T.SetOrPerformTransition(component, "self_modulate", C.ToColor(modulateSelf));
             }
             if (C.TryGetStyleProps(props, "visible", out object visible))
             {
