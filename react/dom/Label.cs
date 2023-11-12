@@ -17,7 +17,10 @@ namespace Spectral.React {
         
         protected override void updatePropsImpl(ScriptObject newProps) {
             ControlPropHelpers.InjectProps(this, _instance, _previousProps, newProps);
-            _instance.Text = TextPropHelpers.GetTextContent(newProps);
+            if (TextPropHelpers.ShouldUpdateTextContent(newProps))
+            {
+                _instance.Text = TextPropHelpers.GetTextContent(newProps);
+            }
             ThemePropHelpers.InjectFontProps(_instance, _previousProps, newProps);
             ThemePropHelpers.InjectFontShadowProps(_instance, _previousProps, newProps);
             C.InjectThemeStyleboxProps(_instance, newProps, "normal", "normal");

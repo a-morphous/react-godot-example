@@ -11,7 +11,10 @@ namespace Spectral.React
         {
             ControlPropHelpers.InjectProps(this, _instance, _previousProps, newProps);
 
-            _instance.Text = TextPropHelpers.GetTextContent(newProps);
+            if (TextPropHelpers.ShouldUpdateTextContent(newProps))
+            {
+                _instance.Text = TextPropHelpers.GetTextContent(newProps);
+            }
             ThemePropHelpers.InjectFontProps(_instance, _previousProps, newProps);
             ThemePropHelpers.InjectSeparationProps(_instance, _previousProps, newProps);
 

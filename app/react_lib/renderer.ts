@@ -1,6 +1,10 @@
 import Reconciler from "react-reconciler"
 import type { ComponentProps } from "react"
 
+const shallowCompare = (obj1, obj2) =>
+  Object.keys(obj1).length === Object.keys(obj2).length &&
+  Object.keys(obj1).every(key => obj1[key] === obj2[key]);
+
 const CustomReconciler = Reconciler<
 	string, // type for creating components
 	Record<string, any>, // props
@@ -62,11 +66,35 @@ const CustomReconciler = Reconciler<
 		type: string,
 		oldProps: Record<string, any>,
 		newProps: Record<string, any>
-	) {
+	): Record<string, any> {
 		if (oldProps === newProps) {
-			return null
+			return {}
 		}
-		return newProps
+
+		if (!oldProps) {
+			return newProps
+		}
+
+		// diff the two to make sure that we don't send over too many props
+		const diffedProps = {}
+		for (let key of Object.keys(newProps)) {
+			if (newProps[key] === oldProps[key]) {
+				continue;
+			}
+
+			// for style and raw, we have to go one deeper
+			if (key === "style" || key === "raw") {
+				const newObj = newProps[key]
+				const prevObj = oldProps[key]
+
+				if (shallowCompare(newObj, prevObj)) {
+					continue;
+				}
+			}
+			diffedProps[key] = newProps[key]
+		}
+
+		return diffedProps
 	},
 	resetAfterCommit(containerInfo: Document): void {
 		// noop

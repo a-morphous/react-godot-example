@@ -3,30 +3,44 @@ using System.Text;
 using Godot;
 using Microsoft.ClearScript;
 
-namespace Spectral.React {
-    public class TextPropHelpers {
+namespace Spectral.React
+{
+    public class TextPropHelpers
+    {
         static readonly StringBuilder sb = new();
 
-        public static string GetTextContent(ScriptObject props) {
-            var children = props.GetProperty("children");
-
-            if (children != null && children is string v) {
-                return v;
+        public static bool ShouldUpdateTextContent(ScriptObject props) {
+            if (!C.TryGetProps(props, "children", out object children)) {
+                return false;
             }
+            return true;
+        }
 
-            if (children != null && children is IList) {
-                sb.Clear();
-                foreach (var item in (dynamic)children) {
-                    if (item is string itemText) {
-                        sb.Append(itemText);
-                        continue;
-                    }
-                    sb.Append((object)item.ToString());
+        public static string GetTextContent(ScriptObject props)
+        {
+            if (C.TryGetProps(props, "children", out object children))
+            {
+                if (children != null && children is string v)
+                {
+                    return v;
                 }
 
-                return sb.ToString();
-            }
+                if (children != null && children is IList)
+                {
+                    sb.Clear();
+                    foreach (var item in (dynamic)children)
+                    {
+                        if (item is string itemText)
+                        {
+                            sb.Append(itemText);
+                            continue;
+                        }
+                        sb.Append((object)item.ToString());
+                    }
 
+                    return sb.ToString();
+                }
+            }
             return "";
         }
     }

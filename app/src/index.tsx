@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { render } from "renderer"
 import { LayoutPreset, MouseFilterEnum, SizeFlags } from "gd"
 import { AnimatableNode } from "enums"
 
 const App = () => {
 	const [count, setCount] = useState(0)
+	const texture = useRef<Texture2D>(GD.Load<Texture2D>("res://assets/boxNormal.png"))
+	const position = useRef<Vector2>(new Vector2(400, 300))
 	return (
 		<>
 			<margin
@@ -121,8 +123,8 @@ const App = () => {
 				name="RawNode!"
 				type="Sprite2D"
 				raw={{
-					position: new Vector2(400, 300),
-					texture: GD.Load<Texture2D>("res://assets/boxNormal.png")
+					position: position.current,
+					texture: texture.current
 				}}
 			></raw>
 		</>
