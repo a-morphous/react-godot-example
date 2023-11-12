@@ -20,18 +20,7 @@ namespace Spectral.React
 				_instance.Alignment = (FlowContainer.AlignmentMode)Convert.ToInt64(alignment);
 			}
 
-			if (
-				C.TryGetStyleProps(newProps, "hSeparation", out object hSeparation)
-			)
-			{
-				_instance.AddThemeConstantOverride("h_separation", (int)hSeparation);
-			}
-			if (
-				C.TryGetStyleProps(newProps, "vSeparation", out object vSeparation)
-			)
-			{
-				_instance.AddThemeConstantOverride("v_separation", (int)vSeparation);
-			}
+			ThemePropHelpers.InjectSeparationProps(_instance, _previousProps, newProps);
 		}
 	}
 }

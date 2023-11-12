@@ -1,7 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://n4tuv3fsdgqj"]
+[gd_scene load_steps=4 format=3 uid="uid://n4tuv3fsdgqj"]
 
 [ext_resource type="Script" path="res://react/gd-nodes/Document.cs" id="1_hdoqv"]
+[ext_resource type="Texture2D" uid="uid://dppxnmd13acn2" path="res://assets/boxNormal.png" id="2_3axex"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_souo4"]
+texture = ExtResource("2_3axex")
+texture_margin_left = 31.1485
+texture_margin_top = 33.0712
+texture_margin_right = 32.6867
+texture_margin_bottom = 36.9167
+region_rect = Rect2(5, 2, 122, 126)
 
 [node name="Document" type="CanvasLayer"]
 script = ExtResource("1_hdoqv")
 LiveReload = true
+
+[node name="Container" type="BoxContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Container" type="Container" parent="Container/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_souo4")

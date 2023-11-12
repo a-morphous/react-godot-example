@@ -1,4 +1,5 @@
-// CONTROL
+// GENERIC STYLES
+
 interface ControlStyle {
 	// global position. For absolutely positioned controls only.
 	x?: number
@@ -25,7 +26,7 @@ interface ControlStyle {
 	// offsetTop?: number
 	// pivotOffset?: Vector2
 
-	modulate?: Color
+	modulate?: ColorType
 	visible?: boolean
 	zIndex?: number
 
@@ -54,6 +55,23 @@ interface ControlStyle {
 
 	layoutDirection?: LayoutDirectionEnum
 }
+
+interface FontStyle {
+	font?: string // as a res:// string
+	fontSize?: number
+	fontColor?: ColorType
+	fontOutlineColor?: ColorType
+	fontOutlineSize?: number
+}
+
+interface FontShadowStyle {
+	fontShadowColor?: ColorType
+	shadowOffsetX?: number
+	shadowOffsetY?: number
+	shadowOutlineSize?: number
+}
+
+// CONTROL
 interface ControlAttributes<T> extends DomAttributes<T> {
 	children?: ReactNode | undefined
 	theme?: string // path to a theme resource
@@ -75,13 +93,49 @@ interface ContainerAttributes<T> extends ControlAttributes<T> {}
 interface ButtonAttributes<T> extends ControlAttributes<T> {
 	onClick?: () => void
 
-	// disabled?: boolean
-	// icon?: string // res:// path to the Texture2D for the icon
-	// flat?: boolean
+	clipText?: boolean
+	disabled?: boolean
+	expandIcon?: boolean
+	icon?: string // res:// path to the Texture2D for the icon
+	flat?: boolean
+
+	style?: ControlStyle &
+		FontStyle & {
+			// theme styles
+			fontDisabledColor?: ColorType
+			fontFocusColor?: ColorType
+			fontHoverColor?: ColorType
+			fontPressedColor?: ColorType
+			fontHoverPressedColor?: ColorType
+			iconColor?: ColorType
+			iconDisabledColor?: ColorType
+			iconFocusColor?: ColorType
+			iconHoverColor?: ColorType
+			iconPressedColor?: ColorType
+			iconHoverPressedColor?: ColorType
+			hSeparation?: number
+			iconMaxWidth?: number
+
+			// TODO: Maybe allow making styleboxes in js
+			disabledStyle?: string // res string for now
+			focusStyle?: string
+			hoverStyle?: string
+			normalStyle?: string
+			pressedStyle?: string
+		}
 }
 
 interface LabelAttributes<T> extends ContainerAttributes<T> {
 	rich?: bool // makes it a rich text node
+
+	style?: ControlStyle &
+		FontStyle & FontShadowStyle & {
+			uppercase?: bool
+
+			// theme styles
+			lineSpacing?: number
+			normalStyle?: string // res:// string for StyleBox
+		}
 }
 
 interface BoxAttributes<T> extends ContainerAttributes<T> {

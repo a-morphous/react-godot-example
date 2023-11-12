@@ -4,60 +4,6 @@ using Microsoft.ClearScript;
 
 namespace Spectral.React
 {
-
-    /// <summary>
-    /// helper class to pull info out of props
-    /// </summary>
-    public static class C
-    {
-        public static bool TryGetProps(ScriptObject props, string property, out object result)
-        {
-            if (props == null)
-            {
-                result = null;
-                return false;
-            }
-            result = props.GetProperty(property);
-            return DoesPropExist(result);
-        }
-
-        /// <summary>
-        /// Use this to get the `style` prop, which has its own nested props.
-        /// </summary>
-        /// <param name="props"></param>
-        /// <param name="property"></param>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        public static bool TryGetStyleProps(ScriptObject props, string property, out object result)
-        {
-            if (props == null)
-            {
-                result = null;
-                return false;
-            }
-            if (!TryGetProps(props, "style", out object styleObj))
-            {
-                result = null;
-                return false;
-            }
-            ScriptObject style = (ScriptObject)styleObj;
-            result = style.GetProperty(property);
-            return DoesPropExist(result);
-        }
-
-        public static bool DoesPropExist(object prop)
-        {
-            if (prop == null)
-            {
-                return false;
-            }
-            if (prop is Undefined)
-            {
-                return false;
-            }
-            return true;
-        }
-    }
     public class ControlPropHelpers
     {
         public static void InjectProps(IDom component, ScriptObject prevProps, ScriptObject props)
@@ -119,7 +65,7 @@ namespace Spectral.React
 
             if (C.TryGetStyleProps(props, "modulate", out object modulate))
             {
-                instance.Modulate = (Color)modulate;
+                instance.Modulate = C.ToColor(modulate);
             }
             if (C.TryGetStyleProps(props, "visible", out object visible))
             {
@@ -150,6 +96,11 @@ namespace Spectral.React
                 var newMinSize = instance.CustomMinimumSize;
                 newMinSize.Y = (int)minHeight;
                 instance.CustomMinimumSize = newMinSize;
+            }
+
+            if (C.TryGetStyleProps(props, "focusMode", out object focusMode))
+            {
+                instance.FocusMode = (Control.FocusModeEnum)Convert.ToInt64(focusMode);
             }
 
             if (C.TryGetStyleProps(props, "expandBehaviorH", out object sizeFlagsH))

@@ -22,5 +22,7 @@ declare class Color {
 	static FromString(str: string, def: Color)
 
 	// TODO: this doesn't seem to work properly! I'll have to figure that out...
-	static FromHtml(str: string)
+	// static FromHtml(str: string)
 }
+
+declare var ColorType = Color | string
