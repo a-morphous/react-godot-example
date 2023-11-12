@@ -4,16 +4,16 @@
  * Used to define animations.
  * All the elements are arrays, and each index in the array points to the same transition style.
  * So if you want to translate width and height by 200ms and 400ms respectively,
- * your transitions array should be 
+ * your transitions array should be
  * [AnimatableNode.Width, AnimatableNode.Height]
- * and your transitionTimeMS array should be 
+ * and your transitionTimeMS array should be
  * [200, 400]
  */
 interface AnimationStyle {
-	transitions?: AnimatableNode[],
-	transitionTimeMS?: number[],
-	transitionTypes?: TransitionType[],
-	transitionEasing?: EaseType[],
+	transitions?: AnimatableNode[]
+	transitionTimeMS?: number[]
+	transitionTypes?: TransitionType[]
+	transitionEasing?: EaseType[]
 }
 
 interface ControlStyle extends AnimationStyle {
@@ -71,7 +71,7 @@ interface ControlStyle extends AnimationStyle {
 	growVertical?: GrowDirection
 
 	layoutDirection?: LayoutDirectionEnum
-} 
+}
 
 interface FontStyle {
 	font?: string // as a res:// string
@@ -96,7 +96,6 @@ interface CanvasItemAttributes<T> extends DomAttributes<T> {
 // CONTROL
 interface ControlAttributes<T> extends CanvasItemAttributes<T> {
 	theme?: string // path to a theme resource
-	
 
 	tooltip?: string
 	onMouseEnter?: () => void
@@ -150,7 +149,8 @@ interface LabelAttributes<T> extends ContainerAttributes<T> {
 	rich?: bool // makes it a rich text node
 
 	style?: ControlStyle &
-		FontStyle & FontShadowStyle & {
+		FontStyle &
+		FontShadowStyle & {
 			uppercase?: bool
 
 			// theme styles
@@ -176,11 +176,11 @@ interface FlowAttributes<T> extends ContainerAttributes<T> {
 
 interface MarginAttributes<T> extends ContainerAttributes<T> {
 	style?: ControlStyle & {
-		marginBottom?: number,
-		marginLeft?: number,
-		marginTop?: number, 
-		marginBottom?: number,
-		margin?: number,
+		marginBottom?: number
+		marginLeft?: number
+		marginTop?: number
+		marginBottom?: number
+		margin?: number
 	}
 }
 
@@ -191,7 +191,7 @@ interface PanelAttributes<T> extends ContainerAttributes<T> {
 }
 
 interface RawNodeAttributes<T> extends CanvasItemAttributes<T> {
-	type?: string,
+	type?: string
 	raw?: Record<string, any>
 }
 
@@ -207,6 +207,10 @@ declare namespace JSX {
 		margin: React.DetailedHTMLProps<MarginAttributes<ControlElement>, ControlElement>
 
 		// used when the actual node is not available.
+		/**
+		 * @deprecated This is only useful for debugging, because it is slow! Used when a node hasn't
+		 * been defined in other contexts.
+		 */
 		raw: React.DetailedHTMLProps<RawNodeAttributes<GlobalJSXElement>, GlobalJSXElement>
 	}
 }
