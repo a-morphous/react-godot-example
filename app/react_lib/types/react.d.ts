@@ -153,6 +153,15 @@ interface FlowAttributes<T> extends ContainerAttributes<T> {
 	}
 }
 
+interface MarginAttributes<T> extends ContainerAttributes<T> {
+	style?: ControlStyle & {
+		marginBottom?: number,
+		marginLeft?: number,
+		marginTop?: number, 
+		marginBottom?: number,
+	}
+}
+
 declare namespace JSX {
 	interface IntrinsicElements {
 		control: React.DetailedHTMLProps<ControlAttributes<ControlElement>, ControlElement>
@@ -162,5 +171,6 @@ declare namespace JSX {
 		hbox: React.DetailedHTMLProps<BoxAttributes<ControlElement>, ControlElement>
 		vbox: React.DetailedHTMLProps<BoxAttributes<ControlElement>, ControlElement>
 		flow: React.DetailedHTMLProps<FlowAttributes<ControlElement>, ControlElement>
+		margin: React.DetailedHTMLProps<MarginAttributes<ControlElement>, ControlElement>
 	}
 }

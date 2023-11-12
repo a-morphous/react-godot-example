@@ -1,14 +1,15 @@
 import React, { useState } from "react"
 import { render } from "renderer"
-import { LayoutPreset, SizeFlags } from "enums"
+import { LayoutPreset, MouseFilterEnum, SizeFlags } from "enums"
 
 const App = () => {
 	const [count, setCount] = useState(0)
 	return (
 		<>
-			<div
+			<margin
 				style={{
 					anchorPreset: LayoutPreset.FullRect,
+					margin: 24,
 				}}
 			>
 				<hbox
@@ -82,6 +83,7 @@ const App = () => {
 				<control
 					style={{
 						zIndex: 1,
+						mouseFilter: MouseFilterEnum.Ignore,
 					}}
 				>
 					<button
@@ -101,7 +103,7 @@ const App = () => {
 						Absolutely positioned! We need panels haha
 					</button>
 				</control>
-			</div>
+			</margin>
 		</>
 	)
 }

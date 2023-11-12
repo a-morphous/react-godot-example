@@ -108,6 +108,9 @@ namespace Spectral.React
 			IDom newNode;
 			switch (type.ToLower())
 			{
+				case "margin":
+					newNode = new MarginNode();
+					break;
 				case "flow":
 					newNode = new FlowNode();
 					break;
