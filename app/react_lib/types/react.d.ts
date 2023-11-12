@@ -159,13 +159,20 @@ interface MarginAttributes<T> extends ContainerAttributes<T> {
 		marginLeft?: number,
 		marginTop?: number, 
 		marginBottom?: number,
+		margin?: number,
+	}
+}
+
+interface PanelAttributes<T> extends ContainerAttributes<T> {
+	style?: ControlStyle & {
+		backgroundStyle?: string // res:// string pointing to a stylebox
 	}
 }
 
 declare namespace JSX {
 	interface IntrinsicElements {
 		control: React.DetailedHTMLProps<ControlAttributes<ControlElement>, ControlElement>
-		div: React.DetailedHTMLProps<ContainerAttributes<ControlElement>, ControlElement>
+		div: React.DetailedHTMLProps<PanelAttributes<ControlElement>, ControlElement>
 		button: React.DetailedHTMLProps<ButtonAttributes<ControlElement>, ControlElement>
 		label: React.DetailedHTMLProps<LabelAttributes<ControlElement>, ControlElement>
 		hbox: React.DetailedHTMLProps<BoxAttributes<ControlElement>, ControlElement>

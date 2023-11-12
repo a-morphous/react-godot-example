@@ -136,6 +136,14 @@ namespace Spectral.React
 				case "control":
 					newNode = new ControlNode();
 					break;
+				case "div":
+					if (C.TryGetStyleProps(props, "backgroundStyle", out object hasBackground))
+					{
+						newNode = new PanelNode();
+						break;
+					}
+					newNode = new ContainerNode();
+					break;
 				default:
 					newNode = new ContainerNode();
 					break;
