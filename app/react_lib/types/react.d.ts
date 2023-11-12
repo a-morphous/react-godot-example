@@ -1,9 +1,10 @@
+
 // CONTROL
 interface ControlStyle {
 	// global position. For absolutely positioned controls only.
 	x?: number
 	y?: number
-	
+
 	// rotation?: number
 	// scale?: Vector2
 
@@ -15,10 +16,10 @@ interface ControlStyle {
 	// focusNext?: string
 	// focusPrevious?: string
 
-	// mouseDefaultCursorShape?: CURSOR_SHAPE
-	// mouseFilter?: MOUSE_FILTER
-	// mouseForcePassScrollEvents?: boolean
-	
+	mouseDefaultCursorShape?: CursorShape
+	mouseFilter?: MouseFilterEnum
+	mouseForcePassScrollEvents?: boolean
+
 	// offsetBottom?: number
 	// offsetLeft?: number
 	// offsetRight?: number
@@ -34,25 +35,30 @@ interface ControlStyle {
 	// anchorRight?: number
 	// anchorTop?: number
 
-	anchorPreset?: LAYOUT_PRESET
+	anchorPreset?: LayoutPreset
 
 	// clipContents?: number
-	
+
 	// used to make up custom min size
 	minWidth?: number
 	minHeight?: number
 
-	expandBehaviorH?: SIZE_FLAGS
-	expandBehaviorV?: SIZE_FLAGS
+	// used to set size
+	width?: number
+	height?: number
 
-	// growHorizontal?: GROW_DIRECTION
-	// growVertical?: GROW_DIRECTION
+	expandBehaviorH?: SizeFlags
+	expandBehaviorV?: SizeFlags
+
+	growHorizontal?: GrowDirection
+	growVertical?: GrowDirection
+	
 	// layoutDirection?: LAYOUT_DIRECTION
 }
 interface ControlAttributes<T> extends DomAttributes<T> {
 	children?: ReactNode | undefined
 	theme?: string // path to a theme resource
-	
+
 	tooltip?: string
 	onMouseEnter?: () => void
 	onMouseExit?: () => void
@@ -62,13 +68,9 @@ interface ControlAttributes<T> extends DomAttributes<T> {
 	// commented out stuff hasn't been implemented yet.
 	style?: ControlStyle
 }
-interface ControlElement extends GlobalJSXElement {
-	
-}
+interface ControlElement extends GlobalJSXElement {}
 
-interface ContainerAttributes<T> extends ControlAttributes<T> {
-
-}
+interface ContainerAttributes<T> extends ControlAttributes<T> {}
 
 interface ButtonAttributes<T> extends ControlAttributes<T> {
 	onClick?: () => void
@@ -78,13 +80,22 @@ interface ButtonAttributes<T> extends ControlAttributes<T> {
 	// flat?: boolean
 }
 
-interface LabelAttributes <T> extends ContainerAttributes<T> {
+interface LabelAttributes<T> extends ContainerAttributes<T> {
 	rich?: bool // makes it a rich text node
 }
 
-interface BoxAttributes <T> extends ContainerAttributes<T> {
+interface BoxAttributes<T> extends ContainerAttributes<T> {
 	style?: ControlStyle & {
 		separation?: number // number in pixels for how much to separate elements.
+	}
+}
+
+interface FlowAttributes<T> extends ContainerAttributes<T> {
+	alignment?: AlignmentMode
+	vertical?: boolean
+	style?: ControlStyle & {
+		hSeparation?: number // number in pixels for how much to separate elements.
+		vSeparation?: number
 	}
 }
 
@@ -96,5 +107,6 @@ declare namespace JSX {
 		label: React.DetailedHTMLProps<LabelAttributes<ControlElement>, ControlElement>
 		hbox: React.DetailedHTMLProps<BoxAttributes<ControlElement>, ControlElement>
 		vbox: React.DetailedHTMLProps<BoxAttributes<ControlElement>, ControlElement>
+		flow: React.DetailedHTMLProps<FlowAttributes<ControlElement>, ControlElement>
 	}
 }

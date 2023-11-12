@@ -108,6 +108,9 @@ namespace Spectral.React
 			IDom newNode;
 			switch (type.ToLower())
 			{
+				case "flow":
+					newNode = new FlowNode();
+					break;
 				case "label":
 					if (C.TryGetProps(props, "rich", out object isRich))
 					{

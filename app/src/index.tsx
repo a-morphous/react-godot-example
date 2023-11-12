@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { render } from "renderer"
-import { LAYOUT_PRESET, SIZE_FLAGS } from "enums"
+import { LayoutPreset, SizeFlags } from "enums"
 
 const App = () => {
 	const [count, setCount] = useState(0)
@@ -8,20 +8,20 @@ const App = () => {
 		<>
 			<div
 				style={{
-					anchorPreset: LAYOUT_PRESET.PRESET_FULL_RECT,
+					anchorPreset: LayoutPreset.FullRect,
 				}}
 			>
 				<hbox
 					style={{
-						expandBehaviorH: SIZE_FLAGS.SIZE_EXPAND_FILL,
-						expandBehaviorV: SIZE_FLAGS.SIZE_EXPAND_FILL,
+						expandBehaviorH: SizeFlags.ExpandFill,
+						expandBehaviorV: SizeFlags.ExpandFill,
 						separation: 20,
 					}}
 				>
 					<vbox
 						style={{
 							minWidth: 100,
-							expandBehaviorV: SIZE_FLAGS.SIZE_EXPAND_FILL,
+							expandBehaviorV: SizeFlags.ExpandFill,
 						}}
 					>
 						<div
@@ -52,8 +52,8 @@ const App = () => {
 					</vbox>
 					<vbox
 						style={{
-							expandBehaviorH: SIZE_FLAGS.SIZE_EXPAND_FILL,
-							expandBehaviorV: SIZE_FLAGS.SIZE_EXPAND_FILL,
+							expandBehaviorH: SizeFlags.ExpandFill,
+							expandBehaviorV: SizeFlags.ExpandFill,
 						}}
 					>
 						<label rich>You have increased the count [b]{count}[/b] times!</label>
@@ -66,6 +66,15 @@ const App = () => {
 							Reset
 						</button>
 					</vbox>
+					<flow style={{
+						expandBehaviorH: SizeFlags.ExpandFill,
+						expandBehaviorV: SizeFlags.ExpandFill,
+					}}>
+						<label>Testing!</label>
+						<label>Testing!</label>
+						<label>Testing!</label>
+						<label>Testing!</label>
+					</flow>
 				</hbox>
 				{/** Absolutely positioned elements need to have a control parent, and preferably are
 				 * top-level nodes. Global positioning might not update totally correctly otherwise.
@@ -82,6 +91,7 @@ const App = () => {
 						style={{
 							x: 300,
 							y: 200,
+							height: 48
 						}}
 					>
 						Absolutely positioned! We need panels haha
