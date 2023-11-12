@@ -1,0 +1,11 @@
+Button {
+	--colors-font-color: #000;
+	--colors-font-color-disabled: Color(0, 0, 0, 0.5);
+  
+	--const-hseparation: 5;
+  
+	--fonts-font: url(res://assets/AlegreyaSC-Regular.ttf);
+  
+	--styles-normal-type: Flat;
+	--styles-normal-bg-color: #fff;
+  }

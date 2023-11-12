@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=3 format=3]
+
+[ext_resource type="FontFile" path="res://assets/AlegreyaSC-Regular.ttf" id="1_gha42"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iql2b"]
+bg_color = Color(1, 1, 1, 1)
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_color_disabled = Color(0, 0, 0, 0.5)
+Button/constants/hseparation = 5
+Button/fonts/font = ExtResource("1_gha42")
+Button/styles/normal = SubResource("StyleBoxFlat_iql2b")
