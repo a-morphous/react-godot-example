@@ -1,8 +1,19 @@
-export enum FOCUS_MODE {
-	FOCUS_NONE = 0,
-	FOCUS_CLICK = 1,
-	FOCUS_ALL = 2,
-}
+export enum FocusModeEnum
+    {
+        //
+        // Summary:
+        //     The node cannot grab focus. Use with Godot.Control.FocusMode.
+        None,
+        //
+        // Summary:
+        //     The node can only grab focus on mouse clicks. Use with Godot.Control.FocusMode.
+        Click,
+        //
+        // Summary:
+        //     The node can grab focus on mouse click, using the arrows and the Tab keys on
+        //     the keyboard, or using the D-pad buttons on a gamepad. Use with Godot.Control.FocusMode.
+        All
+    }
 
 export enum GrowDirection {
 	//
@@ -22,12 +33,25 @@ export enum GrowDirection {
 	Both = 2,
 }
 
-export enum LAYOUT_DIRECTION {
-	LAYOUT_DIRECTION_INHERITED = 0,
-	LAYOUT_DIRECTION_LOCALE = 1,
-	LAYOUT_DIRECTION_LTR = 2,
-	LAYOUT_DIRECTION_RTL = 3,
-}
+export enum LayoutDirectionEnum
+    {
+        //
+        // Summary:
+        //     Automatic layout direction, determined from the parent control layout direction.
+        Inherited,
+        //
+        // Summary:
+        //     Automatic layout direction, determined from the current locale.
+        Locale,
+        //
+        // Summary:
+        //     Left-to-right layout direction.
+        Ltr,
+        //
+        // Summary:
+        //     Right-to-left layout direction.
+        Rtl
+    }
 
 export enum LayoutPreset {
 	//

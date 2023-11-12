@@ -1,4 +1,3 @@
-
 // CONTROL
 interface ControlStyle {
 	// global position. For absolutely positioned controls only.
@@ -8,7 +7,7 @@ interface ControlStyle {
 	// rotation?: number
 	// scale?: Vector2
 
-	// focusMode?: FOCUS_MODE
+	focusMode?: FOCUS_MODE
 	// focusNeighborBottom?: string
 	// focusNeighborLeft?: string
 	// focusNeighborRight?: string
@@ -52,12 +51,13 @@ interface ControlStyle {
 
 	growHorizontal?: GrowDirection
 	growVertical?: GrowDirection
-	
-	// layoutDirection?: LAYOUT_DIRECTION
+
+	layoutDirection?: LayoutDirectionEnum
 }
 interface ControlAttributes<T> extends DomAttributes<T> {
 	children?: ReactNode | undefined
 	theme?: string // path to a theme resource
+	name?: string
 
 	tooltip?: string
 	onMouseEnter?: () => void

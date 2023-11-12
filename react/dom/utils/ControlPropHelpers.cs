@@ -105,6 +105,10 @@ namespace Spectral.React
             {
                 instance.MouseExited += () => ((dynamic)mouseExitProps)();
             }
+            if (C.TryGetProps(props, "name", out object stringName))
+            {
+                instance.Name = (string)stringName;
+            }
 
             // STYLE ACTIONS
             if (!C.TryGetProps(props, "style", out object style))
@@ -212,6 +216,10 @@ namespace Spectral.React
             }
             if (C.TryGetStyleProps(props, "growVertical", out object growVertical)) {
                 instance.GrowVertical = (Control.GrowDirection)Convert.ToInt64(growVertical);
+            }
+
+            if (C.TryGetStyleProps(props, "layoutDirection", out object layoutDirection)) {
+                instance.LayoutDirection = (Control.LayoutDirectionEnum)Convert.ToInt64(layoutDirection);
             }
         }
 
