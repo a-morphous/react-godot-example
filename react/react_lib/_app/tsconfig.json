@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"skipLibCheck": true,
+		"removeComments": true,
+		"jsx": "react",
+		"target": "ES6",
+		"moduleResolution": "node",
+		"forceConsistentCasingInFileNames": false,
+		"lib": ["ES6", "es2017"],
+		"typeRoots": ["react_lib/types"],
+		"allowSyntheticDefaultImports": true,
+		"paths": {
+			"*": ["react_lib/*"]
+		},
+	}
+}

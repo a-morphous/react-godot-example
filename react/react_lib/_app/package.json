@@ -1,0 +1,24 @@
+{
+  "name": "gd-react-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-reconciler": "^0.28.8",
+    "esbuild": "^0.19.5",
+    "minimist": "^1.2.8"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-reconciler": "^0.29.0"
+  }
+}
