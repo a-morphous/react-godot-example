@@ -105,7 +105,7 @@ const App = () => {
 								x: 300,
 								y: 200,
 								height: 48,
-								font: "res://assets/AlegreyaSC-Regular.ttf",
+								font: GD.Load<Font>("res://assets/AlegreyaSC-Regular.ttf"),
 								fontSize: 24,
 								fontOutlineColor: "#FF0000",
 								fontOutlineSize: 3,
@@ -119,9 +119,10 @@ const App = () => {
 
 			<raw
 				name="RawNode!"
-				type="Node2D"
+				type="Sprite2D"
 				raw={{
 					position: new Vector2(400, 300),
+					texture: GD.Load<Texture2D>("res://assets/boxNormal.png")
 				}}
 			></raw>
 		</>

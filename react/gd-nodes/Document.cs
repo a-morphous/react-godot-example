@@ -64,6 +64,10 @@ namespace Spectral.React
 			_engine.AddHostType("GD", typeof(GD));
 			_engine.AddHostType("Color", typeof(Color));
 			_engine.AddHostType("Vector2", typeof(Vector2));
+			_engine.AddHostType("Texture2D", typeof(Texture2D));
+			_engine.AddHostType("Theme", typeof(Theme));
+			_engine.AddHostType("Font", typeof(Font));
+			_engine.AddHostType("StyleBox", typeof(StyleBox));
 
 			_engine.AddHostType("Document", typeof(Document));
 			_engine.AddHostObject("root", this);

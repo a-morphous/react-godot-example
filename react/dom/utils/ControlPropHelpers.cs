@@ -6,7 +6,12 @@ namespace Spectral.React
 {
     public class ControlPropHelpers
     {
-        public static void InjectProps(IAnimatedDom component, Control instance, ScriptObject prevProps, ScriptObject props)
+        public static void InjectProps(
+            IAnimatedDom component,
+            Control instance,
+            ScriptObject prevProps,
+            ScriptObject props
+        )
         {
             T.InjectAnimatable(component, prevProps, props);
             if (
@@ -17,11 +22,18 @@ namespace Spectral.React
                 instance.TooltipText = tooltip;
             }
 
-            if (C.TryGetProps(props, "theme", out object theme) && theme is string themePath)
+            if (C.TryGetProps(props, "theme", out object theme))
             {
                 try
                 {
-                    instance.Theme = (Theme)GD.Load(themePath);
+                    if (theme is Theme themeObj)
+                    {
+                        instance.Theme = (Theme)themeObj;
+                    }
+                    else
+                    {
+                        instance.Theme = GD.Load<Theme>((string)theme);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -121,13 +133,20 @@ namespace Spectral.React
             // mouse options
             if (C.TryGetStyleProps(props, "mouseDefaultCursorShape", out object mouseCursorShape))
             {
-                instance.MouseDefaultCursorShape = (Control.CursorShape)Convert.ToInt64(mouseCursorShape);
+                instance.MouseDefaultCursorShape = (Control.CursorShape)
+                    Convert.ToInt64(mouseCursorShape);
             }
             if (C.TryGetStyleProps(props, "mouseFilter", out object mouseFilter))
             {
                 instance.MouseFilter = (Control.MouseFilterEnum)Convert.ToInt64(mouseFilter);
             }
-            if (C.TryGetStyleProps(props, "mouseForcePassScrollEvents", out object mouseForcePassScrollEvents))
+            if (
+                C.TryGetStyleProps(
+                    props,
+                    "mouseForcePassScrollEvents",
+                    out object mouseForcePassScrollEvents
+                )
+            )
             {
                 instance.MouseForcePassScrollEvents = (bool)mouseForcePassScrollEvents;
             }
@@ -168,21 +187,31 @@ namespace Spectral.React
             }
 
             // grow direction
-            if (C.TryGetStyleProps(props, "growHorizontal", out object growHorizontal)) {
+            if (C.TryGetStyleProps(props, "growHorizontal", out object growHorizontal))
+            {
                 instance.GrowHorizontal = (Control.GrowDirection)Convert.ToInt64(growHorizontal);
             }
-            if (C.TryGetStyleProps(props, "growVertical", out object growVertical)) {
+            if (C.TryGetStyleProps(props, "growVertical", out object growVertical))
+            {
                 instance.GrowVertical = (Control.GrowDirection)Convert.ToInt64(growVertical);
             }
 
-            if (C.TryGetStyleProps(props, "layoutDirection", out object layoutDirection)) {
-                instance.LayoutDirection = (Control.LayoutDirectionEnum)Convert.ToInt64(layoutDirection);
+            if (C.TryGetStyleProps(props, "layoutDirection", out object layoutDirection))
+            {
+                instance.LayoutDirection = (Control.LayoutDirectionEnum)
+                    Convert.ToInt64(layoutDirection);
             }
         }
 
-        private static async void SyncGlobalPosition(IDom component, Control instance, ScriptObject props)
+        private static async void SyncGlobalPosition(
+            IDom component,
+            Control instance,
+            ScriptObject props
+        )
         {
-            await component.getDocument().ToSignal(component.getDocument().GetTree(), SceneTree.SignalName.ProcessFrame);
+            await component
+                .getDocument()
+                .ToSignal(component.getDocument().GetTree(), SceneTree.SignalName.ProcessFrame);
             // absolute position
             if (C.TryGetStyleProps(props, "x", out object x))
             {

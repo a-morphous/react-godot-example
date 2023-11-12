@@ -74,7 +74,7 @@ interface ControlStyle extends AnimationStyle {
 }
 
 interface FontStyle {
-	font?: string // as a res:// string
+	font?: FontType // as a res:// string
 	fontSize?: number
 	fontColor?: ColorType
 	fontOutlineColor?: ColorType
@@ -95,7 +95,7 @@ interface CanvasItemAttributes<T> extends DomAttributes<T> {
 
 // CONTROL
 interface ControlAttributes<T> extends CanvasItemAttributes<T> {
-	theme?: string // path to a theme resource
+	theme?: ThemeType // path to a theme resource
 
 	tooltip?: string
 	onMouseEnter?: () => void
@@ -116,7 +116,7 @@ interface ButtonAttributes<T> extends ControlAttributes<T> {
 	clipText?: boolean
 	disabled?: boolean
 	expandIcon?: boolean
-	icon?: string // res:// path to the Texture2D for the icon
+	icon?: Texture2DType // res:// path to the Texture2D for the icon
 	flat?: boolean
 
 	style?: ControlStyle &
@@ -137,11 +137,11 @@ interface ButtonAttributes<T> extends ControlAttributes<T> {
 			iconMaxWidth?: number
 
 			// TODO: Maybe allow making styleboxes in js
-			disabledStyle?: string // res string for now
-			focusStyle?: string
-			hoverStyle?: string
-			normalStyle?: string
-			pressedStyle?: string
+			disabledStyle?: StyleBoxType // res string for now
+			focusStyle?: StyleBoxType
+			hoverStyle?: StyleBoxType
+			normalStyle?: StyleBoxType
+			pressedStyle?: StyleBoxType
 		}
 }
 
@@ -155,7 +155,7 @@ interface LabelAttributes<T> extends ContainerAttributes<T> {
 
 			// theme styles
 			lineSpacing?: number
-			normalStyle?: string // res:// string for StyleBox
+			normalStyle?: StyleBoxType // res:// string for StyleBox
 		}
 }
 
@@ -186,7 +186,7 @@ interface MarginAttributes<T> extends ContainerAttributes<T> {
 
 interface PanelAttributes<T> extends ContainerAttributes<T> {
 	style?: ControlStyle & {
-		backgroundStyle?: string // res:// string pointing to a stylebox
+		backgroundStyle?: StyleBoxType // res:// string pointing to a stylebox
 	}
 }
 
