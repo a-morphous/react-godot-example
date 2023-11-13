@@ -81,9 +81,7 @@ const CustomReconciler = Reconciler<
 			if (newProps[key] === oldProps[key]) {
 				continue;
 			}
-
-			// for style and raw, we have to go one deeper
-			if (key === "style" || key === "raw") {
+			if (newProps[key].constructor == Object) {
 				const newObj = newProps[key]
 				const prevObj = oldProps[key]
 
@@ -91,6 +89,7 @@ const CustomReconciler = Reconciler<
 					continue;
 				}
 			}
+			
 			diffedProps[key] = newProps[key]
 		}
 
