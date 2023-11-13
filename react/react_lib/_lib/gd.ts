@@ -421,3 +421,72 @@ export enum AutowrapMode {
 	//     if that single word does not fit in one line.
 	WordSmart,
 }
+
+export enum ExpandModeEnum {
+	//
+	// Summary:
+	//     The minimum size will be equal to texture size, i.e. Godot.TextureRect can't
+	//     be smaller than the texture.
+	KeepSize,
+	//
+	// Summary:
+	//     The size of the texture won't be considered for minimum size calculation, so
+	//     the Godot.TextureRect can be shrunk down past the texture size.
+	IgnoreSize,
+	//
+	// Summary:
+	//     The height of the texture will be ignored. Minimum width will be equal to the
+	//     current height. Useful for horizontal layouts, e.g. inside Godot.HBoxContainer.
+	FitWidth,
+	//
+	// Summary:
+	//     Same as Godot.TextureRect.ExpandModeEnum.FitWidth, but keeps texture's aspect
+	//     ratio.
+	FitWidthProportional,
+	//
+	// Summary:
+	//     The width of the texture will be ignored. Minimum height will be equal to the
+	//     current width. Useful for vertical layouts, e.g. inside Godot.VBoxContainer.
+	FitHeight,
+	//
+	// Summary:
+	//     Same as Godot.TextureRect.ExpandModeEnum.FitHeight, but keeps texture's aspect
+	//     ratio.
+	FitHeightProportional,
+}
+
+export enum StretchModeEnum {
+	//
+	// Summary:
+	//     Scale to fit the node's bounding rectangle.
+	Scale,
+	//
+	// Summary:
+	//     Tile inside the node's bounding rectangle.
+	Tile,
+	//
+	// Summary:
+	//     The texture keeps its original size and stays in the bounding rectangle's top-left
+	//     corner.
+	Keep,
+	//
+	// Summary:
+	//     The texture keeps its original size and stays centered in the node's bounding
+	//     rectangle.
+	KeepCentered,
+	//
+	// Summary:
+	//     Scale the texture to fit the node's bounding rectangle, but maintain the texture's
+	//     aspect ratio.
+	KeepAspect,
+	//
+	// Summary:
+	//     Scale the texture to fit the node's bounding rectangle, center it and maintain
+	//     its aspect ratio.
+	KeepAspectCentered,
+	//
+	// Summary:
+	//     Scale the texture so that the shorter side fits the bounding rectangle. The other
+	//     side clips to the node's limits.
+	KeepAspectCovered,
+}

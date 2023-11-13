@@ -14,12 +14,6 @@ namespace Spectral.React
 		[Export]
 		bool LiveReload = false;
 
-		public V8ScriptEngine Engine
-		{
-			get { return _engine; }
-			set { _engine = value; }
-		}
-
 		public Document()
 		{
 			_children = new List<IDom>();
@@ -51,6 +45,17 @@ namespace Spectral.React
 			RemoveChild(node.getNode());
 			node.getNode().QueueFree();
 		}
+
+		// INTEROP
+		public void ExposeObjectToJS(string name, object objectToSend) {
+			_engine.AddHostObject(name, objectToSend);
+		}
+
+		public void ExposeTypeToJS(string name, System.Type typeToSend) {
+			_engine.AddHostType(name, typeToSend);
+		}
+
+		// PRIVATE
 
 		void Setup()
 		{
@@ -87,7 +92,7 @@ namespace Spectral.React
 
 		}
 
-		public void OnLiveReload(Array files)
+		protected void OnLiveReload(Array files)
 		{
 			GD.Print("Live reload!");
 			clearChildren();
@@ -100,7 +105,6 @@ namespace Spectral.React
 			{
 				GD.Print("Failed to run livereload ", e);
 			}
-
 		}
 
 		public static IDom createElement(
