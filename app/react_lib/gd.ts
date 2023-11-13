@@ -399,3 +399,25 @@ export enum EaseType {
 	//     is fastest at both ends.
 	OutIn,
 }
+
+export enum AutowrapMode {
+	//
+	// Summary:
+	//     Autowrap is disabled.
+	Off,
+	//
+	// Summary:
+	//     Wraps the text inside the node's bounding rectangle by allowing to break lines
+	//     at arbitrary positions, which is useful when very limited space is available.
+	Arbitrary,
+	//
+	// Summary:
+	//     Wraps the text inside the node's bounding rectangle by soft-breaking between
+	//     words.
+	Word,
+	//
+	// Summary:
+	//     Behaves similarly to Godot.TextServer.AutowrapMode.Word, but force-breaks a word
+	//     if that single word does not fit in one line.
+	WordSmart,
+}

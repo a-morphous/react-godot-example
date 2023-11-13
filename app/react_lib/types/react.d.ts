@@ -148,14 +148,38 @@ interface ButtonAttributes<T> extends ControlAttributes<T> {
 interface LabelAttributes<T> extends ContainerAttributes<T> {
 	rich?: bool // makes it a rich text node
 
+	// for rich box only
+	contextMenuEnabled?: boolean
+	deselectOnFocusLoss?: boolean
+
 	style?: ControlStyle &
 		FontStyle &
 		FontShadowStyle & {
 			uppercase?: bool
+			autowrapMode?: AutowrapMode
 
 			// theme styles
 			lineSpacing?: number
 			normalStyle?: StyleBoxType // res:// string for StyleBox
+
+			// for rich box only
+			fitContent?: boolean
+			scrollActive?: boolean
+			scrollFollowing?: boolean
+			selectionEnabled?: boolean
+
+			// rich theme styles
+			// normal font uses regular font styles
+			boldFont?: FontType,
+			boldItalicFont?: FontType,
+			italicFont?: FontType,
+			monoFont?: FontType,
+			boldFontSize?: number,
+			boldItalicFontSize?: number,
+			italicFontSize?: number,
+			monoFontSize?: number,
+			
+			focusStyle?: StyleBoxType
 		}
 }
 
