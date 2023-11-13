@@ -18,6 +18,18 @@ namespace Spectral.React
             return Color.FromHtml(Convert.ToString(obj));
         }
 
+        public static Texture2D ToTexture(object obj)
+        {
+            if (obj is Texture2D tex)
+            {
+                return tex;
+            }
+            else
+            {
+                return GD.Load<Texture2D>((string)obj);
+            }
+        }
+
         public static bool TryGetProps(ScriptObject props, string property, out object result)
         {
             if (props == null)
@@ -161,17 +173,7 @@ namespace Spectral.React
             {
                 try
                 {
-                    if (texturePath is Texture2D tex)
-                    {
-                        instance.AddThemeIconOverride(themeNameToOverride, tex);
-                    }
-                    else
-                    {
-                        instance.AddThemeIconOverride(
-                            themeNameToOverride,
-                            GD.Load<Texture2D>((string)texturePath)
-                        );
-                    }
+                    instance.AddThemeIconOverride(themeNameToOverride, ToTexture(texturePath));
                 }
                 catch (Exception e)
                 {

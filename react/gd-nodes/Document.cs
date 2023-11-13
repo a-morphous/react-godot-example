@@ -115,6 +115,9 @@ namespace Spectral.React
 				case "margin":
 					newNode = new MarginNode();
 					break;
+				case "image":
+					newNode = new TextureNode();
+					break;
 				case "flow":
 					newNode = new FlowNode();
 					break;

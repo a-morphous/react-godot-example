@@ -178,7 +178,7 @@ interface LabelAttributes<T> extends ContainerAttributes<T> {
 			boldItalicFontSize?: number,
 			italicFontSize?: number,
 			monoFontSize?: number,
-			
+
 			focusStyle?: StyleBoxType
 		}
 }
@@ -214,6 +214,16 @@ interface PanelAttributes<T> extends ContainerAttributes<T> {
 	}
 }
 
+interface TextureRectAttributes<T> extends ControlAttributes<T> {
+	texture: TextureType,
+	style?: ControlStyle & {
+		flipH?: boolean,
+		flipV?: boolean,
+		expandMode?: ExpandModeEnum,
+		stretchMode?: StretchModeEnum,
+	}
+}
+
 interface RawNodeAttributes<T> extends CanvasItemAttributes<T> {
 	type?: string
 	raw?: Record<string, any>
@@ -229,6 +239,7 @@ declare namespace JSX {
 		vbox: React.DetailedHTMLProps<BoxAttributes<ControlElement>, ControlElement>
 		flow: React.DetailedHTMLProps<FlowAttributes<ControlElement>, ControlElement>
 		margin: React.DetailedHTMLProps<MarginAttributes<ControlElement>, ControlElement>
+		image: React.DetailedHTMLProps<TextureRectAttributes<ControlElement>, ControlElement>
 
 		// used when the actual node is not available.
 		/**

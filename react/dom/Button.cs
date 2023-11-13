@@ -50,7 +50,7 @@ namespace Spectral.React
             {
                 try
                 {
-                    _instance.Icon = GD.Load<Texture2D>((string)icon);
+                    _instance.Icon = C.ToTexture(icon);
                 }
                 catch (System.Exception e)
                 {

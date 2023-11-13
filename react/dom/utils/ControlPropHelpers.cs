@@ -103,19 +103,6 @@ namespace Spectral.React
                 instance.SetAnchorsPreset((Control.LayoutPreset)Convert.ToInt64(anchorPreset));
             }
 
-            if (C.TryGetStyleProps(props, "minWidth", out object minWidth))
-            {
-                var newMinSize = instance.CustomMinimumSize;
-                newMinSize.X = (int)minWidth;
-                instance.CustomMinimumSize = newMinSize;
-            }
-            if (C.TryGetStyleProps(props, "minHeight", out object minHeight))
-            {
-                var newMinSize = instance.CustomMinimumSize;
-                newMinSize.Y = (int)minHeight;
-                instance.CustomMinimumSize = newMinSize;
-            }
-
             if (C.TryGetStyleProps(props, "focusMode", out object focusMode))
             {
                 instance.FocusMode = (Control.FocusModeEnum)Convert.ToInt64(focusMode);
@@ -170,6 +157,19 @@ namespace Spectral.React
             if (hasGlobalPosition)
             {
                 SyncGlobalPosition(component, instance, props);
+            }
+
+            if (C.TryGetStyleProps(props, "minWidth", out object minWidth))
+            {
+                var newMinSize = instance.CustomMinimumSize;
+                newMinSize.X = (int)minWidth;
+                instance.CustomMinimumSize = newMinSize;
+            }
+            if (C.TryGetStyleProps(props, "minHeight", out object minHeight))
+            {
+                var newMinSize = instance.CustomMinimumSize;
+                newMinSize.Y = (int)minHeight;
+                instance.CustomMinimumSize = newMinSize;
             }
 
             // size

@@ -88,6 +88,10 @@ const App = () => {
 							<label>Testing!</label>
 							<label>Testing!</label>
 							<label>Testing!</label>
+							<image texture={GD.Load<Texture2D>("res://assets/fish_icon.png")} style={{
+								minWidth: 64,
+								minHeight: 64,
+							}}></image>
 						</flow>
 					</hbox>
 					{/** Absolutely positioned elements need to have a control parent, and preferably are
