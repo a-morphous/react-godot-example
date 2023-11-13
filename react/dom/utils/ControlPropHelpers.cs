@@ -13,7 +13,8 @@ namespace Spectral.React
             ScriptObject props
         )
         {
-            T.InjectAnimatable(component, prevProps, props);
+            C.InjectBaseProps(component, instance, prevProps, props);
+            
             if (
                 C.TryGetProps(props, "tooltip", out object tooltipProps)
                 && tooltipProps is string tooltip
@@ -63,10 +64,6 @@ namespace Spectral.React
             {
                 instance.MouseExited += () => ((dynamic)mouseExitProps)();
             }
-            if (C.TryGetProps(props, "name", out object stringName))
-            {
-                instance.Name = (string)stringName;
-            }
 
             // STYLE ACTIONS
             if (!C.TryGetProps(props, "style", out object style))
@@ -74,25 +71,6 @@ namespace Spectral.React
                 return;
             }
 
-            if (C.TryGetStyleProps(props, "modulate", out object modulate))
-            {
-                // TODO: actually factor in the transition
-                var modulateTween = component.getTween("modulate");
-                modulateTween.TweenProperty(instance, "modulate", C.ToColor(modulate), .4);
-                // instance.Modulate = C.ToColor(modulate);
-            }
-            if (C.TryGetStyleProps(props, "modulateSelf", out object modulateSelf))
-            {
-                T.SetOrPerformTransition(component, "self_modulate", C.ToColor(modulateSelf));
-            }
-            if (C.TryGetStyleProps(props, "visible", out object visible))
-            {
-                instance.Visible = (bool)visible;
-            }
-            if (C.TryGetStyleProps(props, "zIndex", out object zIndex))
-            {
-                instance.ZIndex = (int)zIndex;
-            }
             if (C.TryGetStyleProps(props, "autoTranslate", out object autoTranslate))
             {
                 instance.AutoTranslate = (bool)autoTranslate;

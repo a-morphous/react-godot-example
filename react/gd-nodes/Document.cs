@@ -120,6 +120,9 @@ namespace Spectral.React
 					newNode = new MarginNode();
 					break;
 				case "image":
+					newNode = new SpriteNode();
+					break;
+				case "texture":
 					newNode = new TextureNode();
 					break;
 				case "flow":

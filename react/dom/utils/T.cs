@@ -55,7 +55,7 @@ namespace Spectral.React
                     {
                         if (transitionTimeMS.length > i)
                         {
-                            delay = (float)transitionTimeMS[i] / 1000f;
+                            delay = Convert.ToSingle(transitionTimeMS[i]) / 1000f;
                         }
                     }
                     component.setTransitionProperties(

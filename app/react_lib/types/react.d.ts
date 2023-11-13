@@ -16,11 +16,18 @@ interface AnimationStyle {
 	transitionEasing?: EaseType[]
 }
 
-interface ControlStyle extends AnimationStyle {
-	// global position. For absolutely positioned controls only.
+interface NodeStyle {
+	// global position. For Sprite2D, it's local, for Control, it's global.
 	x?: number
 	y?: number
 
+	modulate?: ColorType
+	modulateSelf?: ColorType
+	visible?: boolean
+	zIndex?: number
+}
+
+interface ControlStyle extends NodeStyle, AnimationStyle {
 	// rotation?: number
 	// scale?: Vector2
 
@@ -42,11 +49,6 @@ interface ControlStyle extends AnimationStyle {
 	// offsetTop?: number
 	// pivotOffset?: Vector2
 
-	modulate?: ColorType
-	modulateSelf?: ColorType
-	visible?: boolean
-	zIndex?: number
-
 	// anchorBottom?: number
 	// anchorLeft?: number
 	// anchorRight?: number
@@ -56,13 +58,13 @@ interface ControlStyle extends AnimationStyle {
 
 	// clipContents?: number
 
-	// used to make up custom min size
-	minWidth?: number
-	minHeight?: number
-
 	// used to set size
 	width?: number
 	height?: number
+
+	// used to make up custom min size
+	minWidth?: number
+	minHeight?: number
 
 	expandBehaviorH?: SizeFlags
 	expandBehaviorV?: SizeFlags
@@ -170,14 +172,14 @@ interface LabelAttributes<T> extends ContainerAttributes<T> {
 
 			// rich theme styles
 			// normal font uses regular font styles
-			boldFont?: FontType,
-			boldItalicFont?: FontType,
-			italicFont?: FontType,
-			monoFont?: FontType,
-			boldFontSize?: number,
-			boldItalicFontSize?: number,
-			italicFontSize?: number,
-			monoFontSize?: number,
+			boldFont?: FontType
+			boldItalicFont?: FontType
+			italicFont?: FontType
+			monoFont?: FontType
+			boldFontSize?: number
+			boldItalicFontSize?: number
+			italicFontSize?: number
+			monoFontSize?: number
 
 			focusStyle?: StyleBoxType
 		}
@@ -215,12 +217,22 @@ interface PanelAttributes<T> extends ContainerAttributes<T> {
 }
 
 interface TextureRectAttributes<T> extends ControlAttributes<T> {
-	texture: TextureType,
+	texture: TextureType
 	style?: ControlStyle & {
-		flipH?: boolean,
-		flipV?: boolean,
-		expandMode?: ExpandModeEnum,
-		stretchMode?: StretchModeEnum,
+		flipH?: boolean
+		flipV?: boolean
+		expandMode?: ExpandModeEnum
+		stretchMode?: StretchModeEnum
+	}
+}
+
+interface SpriteAttributes<T> extends Omit<CanvasItemAttributes<T>, "children"> {
+	texture: TextureType
+	frame?: number
+	style?: NodeStyle & {
+		rotation?: number,
+		scaleX?: number,
+		scaleY?: number,
 	}
 }
 
@@ -239,7 +251,8 @@ declare namespace JSX {
 		vbox: React.DetailedHTMLProps<BoxAttributes<ControlElement>, ControlElement>
 		flow: React.DetailedHTMLProps<FlowAttributes<ControlElement>, ControlElement>
 		margin: React.DetailedHTMLProps<MarginAttributes<ControlElement>, ControlElement>
-		image: React.DetailedHTMLProps<TextureRectAttributes<ControlElement>, ControlElement>
+		texture: React.DetailedHTMLProps<TextureRectAttributes<ControlElement>, ControlElement>
+		image: React.DetailedHTMLProps<SpriteAttributes<ControlElement>, ControlElement>
 
 		// used when the actual node is not available.
 		/**

@@ -238,5 +238,43 @@ namespace Spectral.React
                 }
             }
         }
+
+        public static void InjectBaseProps(
+            IAnimatedDom component,
+            CanvasItem instance,
+            ScriptObject prevProps,
+            ScriptObject props
+        )
+        {
+            T.InjectAnimatable(component, prevProps, props);
+            if (C.TryGetProps(props, "name", out object stringName))
+            {
+                instance.Name = (string)stringName;
+            }
+
+            if (!C.TryGetProps(props, "style", out object style))
+            {
+                return;
+            }
+            if (C.TryGetStyleProps(props, "modulate", out object modulate))
+            {
+                // TODO: actually factor in the transition
+                var modulateTween = component.getTween("modulate");
+                modulateTween.TweenProperty(instance, "modulate", C.ToColor(modulate), .4);
+                // instance.Modulate = C.ToColor(modulate);
+            }
+            if (C.TryGetStyleProps(props, "modulateSelf", out object modulateSelf))
+            {
+                T.SetOrPerformTransition(component, "self_modulate", C.ToColor(modulateSelf));
+            }
+            if (C.TryGetStyleProps(props, "visible", out object visible))
+            {
+                instance.Visible = (bool)visible;
+            }
+            if (C.TryGetStyleProps(props, "zIndex", out object zIndex))
+            {
+                instance.ZIndex = (int)zIndex;
+            }
+        }
     }
 }
