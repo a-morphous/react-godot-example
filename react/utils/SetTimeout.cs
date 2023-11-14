@@ -5,15 +5,14 @@ using Microsoft.ClearScript.V8;
 
 namespace Spectral.React
 {
-
     /// <summary>
     /// A helper class that uses async / await and Task.delay
-    /// to create an implementation of setTimeout. 
+    /// to create an implementation of setTimeout.
     /// There is only ever *one* task that is being awaited, which is created from a Schedule call.
     /// All setTimeout and setInterval calls are created in a queue.
     /// If a new timeout is added, the existing task is canceled, and a new one created, and that function
     /// added to the timeout queue in the order in which they should execute.
-    /// 
+    ///
     /// The task always counts down to the first 'timeout' that the app is waiting for. When the
     /// delay is reached, the first function in the timeout queue is executed, and then a new Schedule
     /// is called with the time required to reach the next timeout function. And so on and so forth.
@@ -43,14 +42,16 @@ namespace Spectral.React
             else
             {
                 _token ??= new System.Threading.CancellationTokenSource();
-                try {
+                try
+                {
                     await Task.Delay((int)delay, _token.Token);
                     Schedule(_callback());
-                } catch (TaskCanceledException e) {
+                }
+                catch (TaskCanceledException)
+                {
                     // this is normal
                     GD.Print("we canceled a task!");
                 }
-                
             }
         }
     }
@@ -103,5 +104,4 @@ namespace Spectral.React
             );
         }
     }
-
 }
