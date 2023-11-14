@@ -2,9 +2,11 @@ import React, { useRef, useState } from "react"
 import { render } from "renderer"
 import { LayoutPreset, MouseFilterEnum, SizeFlags } from "gd"
 import { AnimatableNode } from "enums"
+import { Transition } from "./components/Transition"
 
 const App = () => {
 	const [count, setCount] = useState(0)
+	const ref = useRef<IDom>()
 	const texture = useRef<Texture2D>(GD.Load<Texture2D>("res://assets/boxNormal.png"))
 	const position = useRef<Vector2>(new Vector2(400, 300))
 	return (
@@ -20,7 +22,7 @@ const App = () => {
 						backgroundStyle: "res://assets/panel.tres",
 						modulateSelf: count > 2 ? "#FFFFFFFF" : "#FFFFFF00",
 						transitions: [AnimatableNode.ModulateSelf],
-						transitionTimeMS: [100],
+						transitionTimeMS: [500],
 					}}
 				>
 					<hbox
@@ -85,24 +87,48 @@ const App = () => {
 							}}
 						>
 							<label>Testing!</label>
+							<label class="opacity-50">Testing!</label>
 							<label>Testing!</label>
-							<label>Testing!</label>
-							<label>Testing!</label>
-							<texture texture={GD.Load<Texture2D>("res://assets/fish_icon.png")} style={{
-								minWidth: 64,
-								minHeight: 64,
-							}}></texture>
-							<control><image texture={GD.Load<Texture2D>("res://assets/fish_icon.png")} style={{
-								scaleX: 0.1,
-								scaleY: 0.1,
-							}}></image></control>
-							
+							<Transition
+								show={count > 0}
+								appear={false}
+								style={{
+									transitions: [AnimatableNode.Modulate],
+									transitionTimeMS: [100],
+								}}
+								enterFrom="opacity-0"
+								enterTo="opacity-100"
+								leaveFrom="opacity-100"
+								leaveTo="opacity-0"
+							>
+								<>
+									<label>Testing!</label>
+									<texture
+										texture={GD.Load<Texture2D>("res://assets/fish_icon.png")}
+										style={{
+											minWidth: 64,
+											minHeight: 64,
+										}}
+									></texture>
+								</>
+							</Transition>
+							<control>
+								<image
+									texture={GD.Load<Texture2D>("res://assets/fish_icon.png")}
+									style={{
+										scaleX: 0.1,
+										scaleY: 0.1,
+									}}
+								></image>
+							</control>
 						</flow>
 					</hbox>
+
 					{/** Absolutely positioned elements need to have a control parent, and preferably are
 					 * top-level nodes. Global positioning might not update totally correctly otherwise.
 					 */}
 					<control
+						ref={ref}
 						style={{
 							zIndex: 1,
 							mouseFilter: MouseFilterEnum.Ignore,
@@ -133,11 +159,23 @@ const App = () => {
 				type="Sprite2D"
 				raw={{
 					position: position.current,
-					texture: texture.current
+					texture: texture.current,
 				}}
 			></raw>
 		</>
 	)
 }
+
+root.setStyleSheet({
+	"opacity-100": {
+		modulate: "#FFFFFFFF",
+	},
+	"opacity-0": {
+		modulate: "#FFFFFF00",
+	},
+	"opacity-50": {
+		modulate: "#FFFFFF80",
+	},
+})
 
 render(<App />)

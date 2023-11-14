@@ -16,6 +16,22 @@ interface AnimationStyle {
 	transitionEasing?: EaseType[]
 }
 
+interface AnimatableStyle {
+	x?: number
+	y?: number
+
+	modulate?: ColorType
+	modulateSelf?: ColorType
+
+	// used to set size
+	width?: number
+	height?: number
+
+	// used to make up custom min size
+	minWidth?: number
+	minHeight?: number
+}
+
 interface NodeStyle {
 	// global position. For Sprite2D, it's local, for Control, it's global.
 	x?: number
@@ -93,10 +109,15 @@ interface FontShadowStyle {
 interface CanvasItemAttributes<T> extends DomAttributes<T> {
 	children?: ReactNode | undefined
 	name?: string
+
+	onTransitionRun?: () => void
+	onTransitionEnd?: () => void
 }
 
 // CONTROL
 interface ControlAttributes<T> extends CanvasItemAttributes<T> {
+	class?: string
+
 	theme?: ThemeType // path to a theme resource
 
 	tooltip?: string

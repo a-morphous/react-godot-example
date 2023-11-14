@@ -13,7 +13,6 @@ namespace Spectral.React
         public RawNode(string type)
         {
             _type = (StringName)type;
-            GD.Print(_type);
             _children = new List<IDom>();
             if (!ClassDB.ClassExists(_type))
             {
@@ -38,7 +37,6 @@ namespace Spectral.React
                     var rawDynamic = (DynamicObject)rawAttributes;
                     foreach (string prop in rawDynamic.GetDynamicMemberNames())
                     {
-                        GD.Print(prop, " ", rawAttributes[prop]);
                         _instance.Set(prop, (Variant)rawAttributes[prop]);
                     }
                 }

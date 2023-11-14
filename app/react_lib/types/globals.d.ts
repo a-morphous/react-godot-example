@@ -1,3 +1,3 @@
-declare var root: any;
+declare var root: Document;
 
 declare var GD: GodotGlobals;

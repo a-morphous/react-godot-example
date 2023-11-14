@@ -31,6 +31,13 @@ namespace Spectral.React
             ScriptObject props
         )
         {
+            if (C.TryGetProps(props, "onTransitionRun", out dynamic onTransitionRun)) {
+                component.setTransitionRunEvent(onTransitionRun);
+            }
+            if (C.TryGetProps(props, "onTransitionEnd", out dynamic onTransitionEnd)) {
+                component.setTransitionEndEvent(onTransitionEnd);
+            }
+
             bool hasPrevProps = C.TryGetStyleProps(
                 prevProps,
                 "transitions",
@@ -111,6 +118,7 @@ namespace Spectral.React
 
         private static void PerformAnimation(
             IAnimatedDom component,
+            ScriptObject props,
             string propertyToAnimate,
             Variant value,
             float duration,
@@ -123,19 +131,25 @@ namespace Spectral.React
                 .TweenProperty(component.getNode(), propertyToAnimate, value, duration)
                 .SetTrans(transitionType)
                 .SetEase(easeType);
+            component.callTransitionRun();
         }
 
         public static void SetOrPerformTransition(
             IAnimatedDom component,
+            ScriptObject props,
             string propertyToSet,
             Variant value
         )
         {
+            if (component.getNode().Get(propertyToSet).Equals(value)) {
+                return;
+            }
             if (component.hasTransitionProperties(propertyToSet))
             {
                 var transProps = component.getTransitionProperties(propertyToSet);
                 PerformAnimation(
                     component,
+                    props,
                     propertyToSet,
                     value,
                     transProps.duration,

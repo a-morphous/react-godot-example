@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Spectral.React {
@@ -18,6 +19,12 @@ namespace Spectral.React {
         public TransitionProperties getTransitionProperties(string property);
 		public void setTransitionProperties(string property, TransitionProperties props);
 		public void removeTransitionProperties(string property);
+
+		// events
+		public void setTransitionRunEvent(dynamic callback);
+		public void setTransitionEndEvent(dynamic callback);
+		public void callTransitionRun();
+		public void callTransitionEnd();
     }
 
 }

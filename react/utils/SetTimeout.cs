@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Godot;
 using Microsoft.ClearScript.V8;
 
 namespace Spectral.React
@@ -42,8 +43,14 @@ namespace Spectral.React
             else
             {
                 _token ??= new System.Threading.CancellationTokenSource();
-                await Task.Delay((int)delay, _token.Token);
-                Schedule(_callback());
+                try {
+                    await Task.Delay((int)delay, _token.Token);
+                    Schedule(_callback());
+                } catch (TaskCanceledException e) {
+                    // this is normal
+                    GD.Print("we canceled a task!");
+                }
+                
             }
         }
     }
