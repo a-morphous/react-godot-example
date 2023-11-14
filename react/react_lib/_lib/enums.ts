@@ -7,4 +7,6 @@ export enum AnimatableNode {
 	MinHeight,
 	X,
 	Y,
+	ScaleX,
+	ScaleY,
 }

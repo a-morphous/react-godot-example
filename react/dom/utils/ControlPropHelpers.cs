@@ -14,7 +14,7 @@ namespace Spectral.React
         )
         {
             C.InjectBaseProps(component, instance, prevProps, props);
-            
+
             if (
                 C.TryGetProps(props, "tooltip", out object tooltipProps)
                 && tooltipProps is string tooltip
@@ -139,29 +139,62 @@ namespace Spectral.React
 
             if (C.TryGetStyleProps(props, "minWidth", out object minWidth))
             {
-                var newMinSize = instance.CustomMinimumSize;
-                newMinSize.X = (int)minWidth;
-                instance.CustomMinimumSize = newMinSize;
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.MinWidth),
+                    Convert.ToInt32(minWidth)
+                );
             }
             if (C.TryGetStyleProps(props, "minHeight", out object minHeight))
             {
-                var newMinSize = instance.CustomMinimumSize;
-                newMinSize.Y = (int)minHeight;
-                instance.CustomMinimumSize = newMinSize;
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.MinHeight),
+                    Convert.ToInt32(minHeight)
+                );
             }
 
             // size
             if (C.TryGetStyleProps(props, "width", out object width))
             {
-                var newSize = instance.Size;
-                newSize.X = (int)width;
-                instance.Size = newSize;
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.Width),
+                    Convert.ToInt32(width)
+                );
             }
             if (C.TryGetStyleProps(props, "height", out object height))
             {
-                var newSize = instance.Size;
-                newSize.Y = (int)height;
-                instance.Size = newSize;
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.Height),
+                    Convert.ToInt32(height)
+                );
+            }
+
+            // scale
+            if (C.TryGetStyleProps(props, "scaleX", out object scaleX))
+            {
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.ScaleX),
+                    Convert.ToSingle(scaleX)
+                );
+            }
+
+            if (C.TryGetStyleProps(props, "scaleY", out object scaleY))
+            {
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.ScaleY),
+                    Convert.ToSingle(scaleY)
+                );
             }
 
             // grow direction

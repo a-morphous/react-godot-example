@@ -19,6 +19,8 @@ namespace Spectral.React
         MinHeight,
         X,
         Y,
+        ScaleX,
+        ScaleY,
     }
 
     public class T
@@ -31,10 +33,12 @@ namespace Spectral.React
             ScriptObject props
         )
         {
-            if (C.TryGetProps(props, "onTransitionRun", out dynamic onTransitionRun)) {
+            if (C.TryGetProps(props, "onTransitionRun", out dynamic onTransitionRun))
+            {
                 component.setTransitionRunEvent(onTransitionRun);
             }
-            if (C.TryGetProps(props, "onTransitionEnd", out dynamic onTransitionEnd)) {
+            if (C.TryGetProps(props, "onTransitionEnd", out dynamic onTransitionEnd))
+            {
                 component.setTransitionEndEvent(onTransitionEnd);
             }
 
@@ -91,7 +95,7 @@ namespace Spectral.React
             }
         }
 
-        private static string GetPropertyNameForAnimatableNode(AnimatableNode animatable)
+        public static string GetPropertyNameForAnimatableNode(AnimatableNode animatable)
         {
             switch (animatable)
             {
@@ -111,6 +115,10 @@ namespace Spectral.React
                     return "position:x";
                 case AnimatableNode.Y:
                     return "position:y";
+                case AnimatableNode.ScaleX:
+                    return "scale:x";
+                case AnimatableNode.ScaleY:
+                    return "scale:y";
                 default:
                     return null;
             }
@@ -141,7 +149,8 @@ namespace Spectral.React
             Variant value
         )
         {
-            if (component.getNode().Get(propertyToSet).Equals(value)) {
+            if (component.getNode().Get(propertyToSet).Equals(value))
+            {
                 return;
             }
             if (component.hasTransitionProperties(propertyToSet))
@@ -156,9 +165,12 @@ namespace Spectral.React
                     transProps.trans,
                     transProps.ease
                 );
-				return;
+                return;
             }
-			component.getNode().Set(propertyToSet, value);
+            component.getNode().SetIndexed(propertyToSet, value);
+            GD.Print(propertyToSet, " ", value, " ", component.getNode().GetIndexed(propertyToSet));
+            
         }
+
     }
 }

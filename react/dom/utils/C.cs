@@ -259,14 +259,23 @@ namespace Spectral.React
             if (C.TryGetStyleProps(props, "modulate", out object modulate))
             {
                 // TODO: actually factor in the transition
-                T.SetOrPerformTransition(component, props, "modulate", C.ToColor(modulate));
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.Modulate),
+                    C.ToColor(modulate)
+                );
                 // instance.Modulate = C.ToColor(modulate);
             }
             if (C.TryGetStyleProps(props, "modulateSelf", out object modulateSelf))
             {
-                T.SetOrPerformTransition(component, props, "self_modulate", C.ToColor(modulateSelf));
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.ModulateSelf),
+                    C.ToColor(modulateSelf)
+                );
                 // instance.SelfModulate = C.ToColor(modulateSelf);
-                
             }
             if (C.TryGetStyleProps(props, "visible", out object visible))
             {

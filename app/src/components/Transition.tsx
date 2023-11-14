@@ -78,10 +78,10 @@ const TransitionBase = ({ class: classProp, children, enter, enterFrom, enterTo,
 
     const classStr = showing && appear && firstRender.current ? `${classProp} ${enter} ${enterFrom}` : classProp
 
-    return <div name="Transition" ref={ref} class={`${classStr}`} style={style} onTransitionRun={onTransitionRun} onTransitionEnd={onTransitionEnd}>
+    return <control name="Transition" ref={ref} class={`${classStr}`} style={style} onTransitionRun={onTransitionRun} onTransitionEnd={onTransitionEnd}>
         {/*reallyShowing ? children : null*/}
 		{children}
-    </div>
+    </control>
 }
 
 export const Transition = ({ class: classProp, children, show, appear, enter, enterFrom, enterTo, leave, leaveFrom, leaveTo, style }: TransitionProps) => {

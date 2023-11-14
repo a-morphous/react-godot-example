@@ -89,37 +89,46 @@ const App = () => {
 							<label>Testing!</label>
 							<label class="opacity-50">Testing!</label>
 							<label>Testing!</label>
-							<Transition
-								show={count > 0}
-								appear={false}
-								style={{
-									transitions: [AnimatableNode.Modulate],
-									transitionTimeMS: [100],
-								}}
-								enterFrom="opacity-0"
-								enterTo="opacity-100"
-								leaveFrom="opacity-100"
-								leaveTo="opacity-0"
-							>
-								<>
-									<label>Testing!</label>
-									<texture
-										texture={GD.Load<Texture2D>("res://assets/fish_icon.png")}
-										style={{
-											minWidth: 64,
-											minHeight: 64,
-										}}
-									></texture>
-								</>
-							</Transition>
 							<control>
-								<image
+								<Transition
+									show={count > 0}
+									appear={false}
+									style={{
+										transitions: [
+											AnimatableNode.Modulate,
+											AnimatableNode.ScaleX,
+										],
+										transitionTimeMS: [100, 100],
+									}}
+									enterFrom="opacity-0"
+									enterTo="opacity-100"
+									leaveFrom="opacity-100"
+									leaveTo="opacity-0"
+								>
+									<>
+										<label>Testing!</label>
+										<texture
+											texture={GD.Load<Texture2D>(
+												"res://assets/fish_icon.png"
+											)}
+											style={{
+												minWidth: 64,
+												minHeight: 64,
+												width: 64,
+												height: 64,
+											}}
+										></texture>
+									</>
+								</Transition>
+							</control>
+							<control>
+								{/*<image
 									texture={GD.Load<Texture2D>("res://assets/fish_icon.png")}
 									style={{
 										scaleX: 0.1,
 										scaleY: 0.1,
 									}}
-								></image>
+								></image>*/}
 							</control>
 						</flow>
 					</hbox>
@@ -169,9 +178,11 @@ const App = () => {
 root.setStyleSheet({
 	"opacity-100": {
 		modulate: "#FFFFFFFF",
+		scaleX: 1,
 	},
 	"opacity-0": {
 		modulate: "#FFFFFF00",
+		scaleX: 0,
 	},
 	"opacity-50": {
 		modulate: "#FFFFFF80",

@@ -16,22 +16,6 @@ interface AnimationStyle {
 	transitionEasing?: EaseType[]
 }
 
-interface AnimatableStyle {
-	x?: number
-	y?: number
-
-	modulate?: ColorType
-	modulateSelf?: ColorType
-
-	// used to set size
-	width?: number
-	height?: number
-
-	// used to make up custom min size
-	minWidth?: number
-	minHeight?: number
-}
-
 interface NodeStyle {
 	// global position. For Sprite2D, it's local, for Control, it's global.
 	x?: number
@@ -41,6 +25,9 @@ interface NodeStyle {
 	modulateSelf?: ColorType
 	visible?: boolean
 	zIndex?: number
+
+	scaleX?: number
+	scaleY?: number
 }
 
 interface ControlStyle extends NodeStyle, AnimationStyle {
@@ -251,9 +238,9 @@ interface SpriteAttributes<T> extends Omit<CanvasItemAttributes<T>, "children"> 
 	texture: TextureType
 	frame?: number
 	style?: NodeStyle & {
-		rotation?: number,
-		scaleX?: number,
-		scaleY?: number,
+		rotation?: number
+		scaleX?: number
+		scaleY?: number
 	}
 }
 
