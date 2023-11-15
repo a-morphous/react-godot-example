@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { render } from "renderer"
-import { LayoutPreset, MouseFilterEnum, SizeFlags } from "gd"
+import { ExpandModeEnum, LayoutPreset, MouseFilterEnum, SizeFlags } from "gd"
 import { AnimatableNode } from "enums"
 import { Transition } from "./components/Transition"
 
@@ -80,57 +80,71 @@ const App = () => {
 								Reset
 							</button>
 						</vbox>
-						<flow
+						<vbox
 							style={{
 								expandBehaviorH: SizeFlags.ExpandFill,
 								expandBehaviorV: SizeFlags.ExpandFill,
 							}}
 						>
-							<label>Testing!</label>
-							<label class="opacity-50">Testing!</label>
-							<label>Testing!</label>
-							<control>
-								<Transition
-									show={count > 0}
-									appear={false}
-									style={{
-										transitions: [
-											AnimatableNode.Modulate,
-											AnimatableNode.ScaleX,
-										],
-										transitionTimeMS: [100, 100],
-									}}
-									enterFrom="opacity-0"
-									enterTo="opacity-100"
-									leaveFrom="opacity-100"
-									leaveTo="opacity-0"
-								>
-									<>
-										<label>Testing!</label>
-										<texture
-											texture={GD.Load<Texture2D>(
-												"res://assets/fish_icon.png"
-											)}
-											style={{
-												minWidth: 64,
-												minHeight: 64,
-												width: 64,
-												height: 64,
-											}}
-										></texture>
-									</>
-								</Transition>
-							</control>
-							<control>
-								{/*<image
-									texture={GD.Load<Texture2D>("res://assets/fish_icon.png")}
-									style={{
-										scaleX: 0.1,
-										scaleY: 0.1,
-									}}
-								></image>*/}
-							</control>
-						</flow>
+							<flow
+								style={{
+									expandBehaviorH: SizeFlags.ExpandFill,
+									expandBehaviorV: SizeFlags.Expand,
+								}}
+							>
+								<label>Testing!</label>
+								<label class="opacity-50">Testing!</label>
+								<label>Testing!</label>
+								<control>
+									<Transition
+										show={count > 0}
+										appear={false}
+										style={{
+											transitions: [
+												AnimatableNode.Modulate,
+												AnimatableNode.ScaleX,
+											],
+											transitionTimeMS: [100, 100],
+										}}
+										enterFrom="opacity-0"
+										enterTo="opacity-100"
+										leaveFrom="opacity-100"
+										leaveTo="opacity-0"
+									>
+										<>
+											<label>Testing!</label>
+											<texture
+												texture={GD.Load<Texture2D>(
+													"res://assets/fish_icon.png"
+												)}
+												style={{
+													minWidth: 64,
+													minHeight: 64,
+													width: 64,
+													height: 64,
+												}}
+											></texture>
+										</>
+									</Transition>
+								</control>
+								<control>
+									{/*<image
+								texture={GD.Load<Texture2D>("res://assets/fish_icon.png")}
+								style={{
+									scaleX: 0.1,
+									scaleY: 0.1,
+								}}
+							></image>*/}
+								</control>
+							</flow>
+							<textedit
+								minimap={true}
+								style={{
+									expandBehaviorH: SizeFlags.ExpandFill,
+									expandBehaviorV: SizeFlags.ExpandFill,
+								}}
+							></textedit>
+						</vbox>
 					</hbox>
 
 					{/** Absolutely positioned elements need to have a control parent, and preferably are

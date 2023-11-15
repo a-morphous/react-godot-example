@@ -490,3 +490,14 @@ export enum StretchModeEnum {
 	//     side clips to the node's limits.
 	KeepAspectCovered,
 }
+
+export enum LineWrappingMode {
+	//
+	// Summary:
+	//     Line wrapping is disabled.
+	None,
+	//
+	// Summary:
+	//     Line wrapping occurs at the control boundary, beyond what would normally be visible.
+	Boundary,
+}

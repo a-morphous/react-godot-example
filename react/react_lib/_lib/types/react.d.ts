@@ -244,6 +244,14 @@ interface SpriteAttributes<T> extends Omit<CanvasItemAttributes<T>, "children"> 
 	}
 }
 
+interface TextEditAttributes<T> extends ControlAttributes<T> {
+	text?: string
+	placeholder?: string
+	minimap?: boolean,
+	editable?: boolean,
+	wrapMode?: LineWrappingMode,
+}
+
 interface RawNodeAttributes<T> extends CanvasItemAttributes<T> {
 	type?: string
 	raw?: Record<string, any>
@@ -261,6 +269,7 @@ declare namespace JSX {
 		margin: React.DetailedHTMLProps<MarginAttributes<ControlElement>, ControlElement>
 		texture: React.DetailedHTMLProps<TextureRectAttributes<ControlElement>, ControlElement>
 		image: React.DetailedHTMLProps<SpriteAttributes<ControlElement>, ControlElement>
+		textedit: React.DetailedHTMLProps<TextEditAttributes<ControlElement>, ControlElement>
 
 		// used when the actual node is not available.
 		/**

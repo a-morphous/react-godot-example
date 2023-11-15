@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Godot;
-using Godot.Collections;
 using Microsoft.ClearScript;
 using Microsoft.ClearScript.V8;
 
@@ -15,6 +15,8 @@ namespace Spectral.React
         bool LiveReload = false;
 
         ScriptObject _styleSheet = null;
+
+        static Dictionary<string, Type> _customNodes = new();
 
         public Document()
         {
@@ -141,12 +143,15 @@ namespace Spectral.React
                 Node DirectoryWatcher = (Node)DirectoryWatcherScript.New(); // This is a GodotObject
                 DirectoryWatcher.Call("add_scan_directory", "res://app/dist");
                 AddChild(DirectoryWatcher);
-                DirectoryWatcher.Connect("files_modified", Callable.From<Array>(OnLiveReload));
+                DirectoryWatcher.Connect(
+                    "files_modified",
+                    Callable.From<Godot.Collections.Array>(OnLiveReload)
+                );
                 GD.Print("Watching!");
             }
         }
 
-        protected void OnLiveReload(Array files)
+        protected void OnLiveReload(Godot.Collections.Array files)
         {
             GD.Print("Live reload!");
             clearChildren();
@@ -164,15 +169,37 @@ namespace Spectral.React
             }
         }
 
-        public static IDom createElement(
+        public static void AddCustomNode(string type, Type nodeType) { 
+			if (_customNodes.ContainsKey(type)) {
+				return;
+			}
+			_customNodes.Add(type, nodeType);
+		}
+
+        public static IAnimatedDom createElement(
             string type,
             ScriptObject props,
             Document rootContainer = null
         )
         {
-            IDom newNode;
+            IAnimatedDom newNode;
+            if (_customNodes.ContainsKey(type))
+            {
+                try
+                {
+                    newNode = (IAnimatedDom)Activator.CreateInstance(_customNodes[type]);
+                    return newNode;
+                }
+                catch (Exception e)
+                {
+                    GD.Print(e);
+                }
+            }
             switch (type.ToLower())
             {
+				case "textedit":
+					newNode = new TextEditNode();
+					break;
                 case "margin":
                     newNode = new MarginNode();
                     break;
