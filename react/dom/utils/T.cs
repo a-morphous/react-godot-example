@@ -168,8 +168,6 @@ namespace Spectral.React
                 return;
             }
             component.getNode().SetIndexed(propertyToSet, value);
-            GD.Print(propertyToSet, " ", value, " ", component.getNode().GetIndexed(propertyToSet));
-            
         }
 
     }

@@ -42,31 +42,44 @@ namespace Spectral.React
 
             if (C.TryGetStyleProps(props, "x", out object x))
             {
-                var pos = instance.Position;
-                pos.X = Convert.ToSingle(x);
-                instance.Position = pos;
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.X),
+                    Convert.ToSingle(x)
+                );
             }
             if (C.TryGetStyleProps(props, "y", out object y))
             {
-                var pos = instance.Position;
-                pos.Y = Convert.ToSingle(y);
-                instance.Position = pos;
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.Y),
+                    Convert.ToSingle(y)
+                );
             }
-			if (C.TryGetStyleProps(props, "rotation", out object rotation))
+            if (C.TryGetStyleProps(props, "rotation", out object rotation))
             {
                 instance.Rotation = Convert.ToSingle(rotation);
             }
-			if (C.TryGetStyleProps(props, "scaleX", out object scaleX))
+            if (C.TryGetStyleProps(props, "scaleX", out object scaleX))
             {
-                var scale = instance.Scale;
-                scale.X = Convert.ToSingle(scaleX);
-                instance.Scale = scale;
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.ScaleX),
+                    Convert.ToSingle(scaleX)
+                );
             }
+
             if (C.TryGetStyleProps(props, "scaleY", out object scaleY))
             {
-                var scale = instance.Scale;
-                scale.Y = Convert.ToSingle(scaleY);
-                instance.Scale = scale;
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    T.GetPropertyNameForAnimatableNode(AnimatableNode.ScaleY),
+                    Convert.ToSingle(scaleY)
+                );
             }
         }
     }

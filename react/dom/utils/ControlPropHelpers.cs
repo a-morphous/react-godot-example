@@ -120,16 +120,10 @@ namespace Spectral.React
             bool hasGlobalPosition = false;
             if (C.TryGetStyleProps(props, "x", out object x))
             {
-                var globalPosition = instance.GlobalPosition;
-                globalPosition.X = (int)x;
-                instance.SetGlobalPosition(globalPosition);
                 hasGlobalPosition = true;
             }
             if (C.TryGetStyleProps(props, "y", out object y))
             {
-                var globalPosition = instance.GlobalPosition;
-                globalPosition.Y = (int)y;
-                instance.SetGlobalPosition(globalPosition);
                 hasGlobalPosition = true;
             }
             if (hasGlobalPosition)
@@ -215,7 +209,7 @@ namespace Spectral.React
         }
 
         private static async void SyncGlobalPosition(
-            IDom component,
+            IAnimatedDom component,
             Control instance,
             ScriptObject props
         )
@@ -226,15 +220,21 @@ namespace Spectral.React
             // absolute position
             if (C.TryGetStyleProps(props, "x", out object x))
             {
-                var globalPosition = instance.GlobalPosition;
-                globalPosition.X = (int)x;
-                instance.SetGlobalPosition(globalPosition);
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    "global_position:x",
+                    Convert.ToSingle(x)
+                );
             }
             if (C.TryGetStyleProps(props, "y", out object y))
             {
-                var globalPosition = instance.GlobalPosition;
-                globalPosition.Y = (int)y;
-                instance.SetGlobalPosition(globalPosition);
+                T.SetOrPerformTransition(
+                    component,
+                    props,
+                    "global_position:y",
+                    Convert.ToSingle(y)
+                );
             }
         }
     }
