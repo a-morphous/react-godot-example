@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cs0gm0p7jns3f"]
+
+[ext_resource type="FontFile" uid="uid://dkdb6swhmgbt" path="res://assets/AlegreyaSC-Regular.ttf" id="1_g34mm"]
+
+[resource]
+default_font = ExtResource("1_g34mm")
+RichTextLabel/font_sizes/font_size = 24

@@ -6,6 +6,7 @@ namespace Spectral.React
 {
     public class TextEditNode : DomNode<TextEdit>
     {
+		System.Action textChangeEvent;
         public TextEditNode()
             : base() { }
 
@@ -37,6 +38,19 @@ namespace Spectral.React
 			if (C.TryGetProps(newProps, "wrapMode", out object wrapMode))
             {
                 _instance.WrapMode = (TextEdit.LineWrappingMode)Convert.ToInt64(wrapMode);
+            }
+
+			if (C.TryGetProps(newProps, "onTextChanged", out dynamic onTextChanged))
+            {
+                if (textChangeEvent != null)
+                {
+                    _instance.TextChanged -= textChangeEvent;
+                }
+                textChangeEvent = () =>
+                {
+                    onTextChanged(_instance.Text);
+                };
+                _instance.TextChanged += textChangeEvent;
             }
         }
     }

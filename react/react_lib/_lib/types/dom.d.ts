@@ -1,4 +1,5 @@
 declare class IDom {
+	getNode(): any
 	setDocument(doc: Document): void
 	getDocument(): Document
 	updateProps(newProps: ComponentProps<any>)

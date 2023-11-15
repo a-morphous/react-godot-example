@@ -250,6 +250,7 @@ interface TextEditAttributes<T> extends ControlAttributes<T> {
 	minimap?: boolean,
 	editable?: boolean,
 	wrapMode?: LineWrappingMode,
+	onTextChanged?: (text: string) => void
 }
 
 interface RawNodeAttributes<T> extends CanvasItemAttributes<T> {
