@@ -5,3 +5,13 @@
 [node name="main" type="Node2D"]
 
 [node name="Document" parent="." instance=ExtResource("1_3dh2e")]
+
+[node name="Control" type="Control" parent="Document"]
+custom_minimum_size = Vector2(96, 75)
+layout_mode = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0

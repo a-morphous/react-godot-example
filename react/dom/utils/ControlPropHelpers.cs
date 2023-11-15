@@ -206,8 +206,54 @@ namespace Spectral.React
                 instance.LayoutDirection = (Control.LayoutDirectionEnum)
                     Convert.ToInt64(layoutDirection);
             }
+            
+            InjectAnchorProps(instance, prevProps, props);
         }
 
+        protected static void InjectAnchorProps(
+            Control instance,
+            ScriptObject prevProps,
+            ScriptObject props)
+        {
+            if (C.TryGetStyleProps(props, "anchorBottom", out object anchorBottom))
+            {
+                // instance.AnchorBottom = Convert.ToSingle(anchorBottom);
+                instance.SetAnchor(Side.Bottom, Convert.ToSingle(anchorBottom));
+            }
+            if (C.TryGetStyleProps(props, "anchorLeft", out object anchorLeft))
+            {
+                // instance.AnchorLeft = Convert.ToSingle(anchorLeft);
+                instance.SetAnchor(Side.Left, Convert.ToSingle(anchorLeft));
+            }
+            if (C.TryGetStyleProps(props, "anchorTop", out object anchorTop))
+            {
+                // instance.AnchorTop = Convert.ToSingle(anchorTop);
+                instance.SetAnchor(Side.Top, Convert.ToSingle(anchorTop));
+            }
+            if (C.TryGetStyleProps(props, "anchorRight", out object anchorRight))
+            {
+                // instance.AnchorRight = Convert.ToSingle(anchorRight);
+                instance.SetAnchor(Side.Right, Convert.ToSingle(anchorRight));
+            }
+            
+            // offset
+            if (C.TryGetStyleProps(props, "offsetBottom", out object offsetBottom))
+            {
+                instance.OffsetBottom = Convert.ToSingle(offsetBottom);
+            }
+            if (C.TryGetStyleProps(props, "offsetLeft", out object offsetLeft))
+            {
+                instance.OffsetLeft = Convert.ToSingle(offsetLeft);
+            }
+            if (C.TryGetStyleProps(props, "offsetTop", out object offsetTop))
+            {
+                instance.OffsetTop = Convert.ToSingle(offsetTop);
+            }
+            if (C.TryGetStyleProps(props, "offsetRight", out object offsetRight))
+            {
+                instance.OffsetRight = Convert.ToSingle(offsetRight);
+            }
+        }
         private static async void SyncGlobalPosition(
             IAnimatedDom component,
             Control instance,

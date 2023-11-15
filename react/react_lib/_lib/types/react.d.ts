@@ -32,7 +32,6 @@ interface NodeStyle {
 
 interface ControlStyle extends NodeStyle, AnimationStyle {
 	// rotation?: number
-	// scale?: Vector2
 
 	focusMode?: FOCUS_MODE
 	// focusNeighborBottom?: string
@@ -45,17 +44,22 @@ interface ControlStyle extends NodeStyle, AnimationStyle {
 	mouseDefaultCursorShape?: CursorShape
 	mouseFilter?: MouseFilterEnum
 	mouseForcePassScrollEvents?: boolean
-
-	// offsetBottom?: number
-	// offsetLeft?: number
-	// offsetRight?: number
-	// offsetTop?: number
+	
 	// pivotOffset?: Vector2
 
-	// anchorBottom?: number
-	// anchorLeft?: number
-	// anchorRight?: number
-	// anchorTop?: number
+	// all from 0 to 1
+	// see https://joshanthony.info/2023/04/22/anchors-and-margins-and-containers-godot-my/
+	// for some information for how these work.
+	// anchors are the same, offsets are margins.
+	anchorBottom?: number
+	anchorLeft?: number
+	anchorRight?: number
+	anchorTop?: number
+
+	offsetBottom?: number
+	offsetLeft?: number
+	offsetRight?: number
+	offsetTop?: number
 
 	anchorPreset?: LayoutPreset
 
