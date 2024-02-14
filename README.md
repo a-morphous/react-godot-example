@@ -2,7 +2,9 @@
 
 React.js integration with the Godot Game Engine by using [Microsoft's Clearscript](https://github.com/microsoft/ClearScript) to run JS code via [Google's v8](https://v8.dev/).
 
-Runs on Godot 4.1's Mono build.
+Runs on Godot 4.2.1's Mono build.
+
+> This is not production-ready code! Nor is any support or maintenance going to be expected. Use at your own risk.
 
 ## Running the sample
 

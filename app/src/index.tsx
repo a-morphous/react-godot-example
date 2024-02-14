@@ -1,5 +1,5 @@
 import { render } from "renderer"
-import { App } from "./examples/dialogue-box"
+import { App } from "./examples/kitchen-sink"
 import React from "react"
 
 root.setStyleSheet({
