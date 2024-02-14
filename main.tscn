@@ -1,18 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg8pvye1pb3ig"]
+[gd_scene load_steps=3 format=3 uid="uid://cg8pvye1pb3ig"]
 
 [ext_resource type="PackedScene" uid="uid://n4tuv3fsdgqj" path="res://react/ReactRoot.tscn" id="1_3dh2e"]
+[ext_resource type="Script" path="res://common/WindowManagement.cs" id="2_1aru7"]
 
 [node name="main" type="Node2D"]
 
 [node name="Document" parent="." instance=ExtResource("1_3dh2e")]
 
-[node name="Control" type="Control" parent="Document"]
-custom_minimum_size = Vector2(96, 75)
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="WindowManagement" type="Node" parent="."]
+script = ExtResource("2_1aru7")
