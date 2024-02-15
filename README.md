@@ -8,8 +8,6 @@ Runs on Godot 4.2.1's Mono build.
 
 ## Running the sample
 
-This is not exactly practical at the moment, so run at your own risk!
-
 There are both NuGet and NPM dependencies, so you'll need to install them after downloading the game project:
 
 ```bash
@@ -30,6 +28,8 @@ $ node build
 # or use this to automatically rebuild on changes
 $ node build -w
 ```
+
+There are three different 'apps' in this sample, under `app/src/examples`. To switch between them, you have to change the import in `app/src/index.tsx` (currently `import { App } from "./examples/kitchen-sink"`) to point to the example you want to run, rebuild the JS app, and run the Godot project.
 
 ## How do I use this in my own project?
 
