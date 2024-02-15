@@ -1,7 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://n4tuv3fsdgqj"]
 
-[ext_resource type="Script" path="res://react/gd-nodes/Document.cs" id="1_hdoqv"]
+[ext_resource type="Script" path="res://react/gd_nodes/Document.cs" id="1_ofoq5"]
 
 [node name="Document" type="CanvasLayer"]
-script = ExtResource("1_hdoqv")
-LiveReload = true
+script = ExtResource("1_ofoq5")

@@ -1,6 +1,6 @@
 # React-lib
 
-This is the JS portion of the app, and exists here as a template that you can copy into your own `app` folder to use React with Godot.
+This is the JS portion of the app, and exists here as a template that you can copy into your own project to use React with Godot.
 
 ## Usage 
 
